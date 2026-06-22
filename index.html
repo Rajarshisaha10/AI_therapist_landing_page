@@ -1,0 +1,524 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Theraseek.ai — Talk to Luma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --rose:#F2B8C6;
+  --rose-deep:#D4708A;
+  --rose-mid:#E8A0B8;
+  --blush:#FFF0F5;
+  --blush-soft:#FDE8F0;
+  --sage:#88CC88;
+  --sage-deep:#5CAA72;
+  --sage-pale:#E8F7E8;
+  --sage-mid:#A8D8A8;
+  --bark:#4A2A3A;
+  --bark-light:#7A5060;
+  --mist:#9A8090;
+  --cream:#FDF7FA;
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--cream);color:var(--bark);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(253,247,250,0.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(242,184,198,0.25);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-text{font-family:'Cormorant Garant',serif;font-size:21px;font-weight:400;color:var(--rose-deep);letter-spacing:0.03em;}
+.nav-logo-text span{color:var(--sage-deep);}
+.nav-links{display:flex;align-items:center;gap:2.2rem;}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:400;color:var(--bark-light);transition:color .25s;}
+.nav-links a:hover{color:var(--rose-deep);}
+.nav-cta{background:var(--rose-deep);color:var(--white)!important;padding:.55rem 1.5rem;border-radius:100px;font-size:14px!important;font-weight:500!important;transition:background .25s,transform .2s!important;}
+.nav-cta:hover{background:#B8547A!important;transform:translateY(-1px)!important;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;padding:6rem 0 3rem;}
+.hero-left{padding:0 3rem 0 5rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--sage-pale);border:1px solid var(--sage-mid);border-radius:100px;padding:.38rem 1rem;font-size:12px;font-weight:500;color:var(--sage-deep);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.8rem;}
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--sage-deep);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Cormorant Garant',serif;font-weight:300;font-size:clamp(2.6rem,4.5vw,4rem);line-height:1.18;color:var(--bark);margin-bottom:1.4rem;letter-spacing:-.01em;}
+.hero h1 em{font-style:italic;color:var(--rose-deep);}
+.hero h1 .g{color:var(--sage-deep);}
+.hero-sub{font-size:16px;line-height:1.85;color:var(--mist);max-width:420px;margin-bottom:2.4rem;font-weight:300;}
+.hero-actions{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+.btn-primary{background:var(--rose-deep);color:var(--white);border:none;padding:.85rem 2rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:background .25s,transform .2s;letter-spacing:.01em;text-decoration:none;display:inline-block;}
+.btn-primary:hover{background:#B8547A;transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--rose-deep);border:1.5px solid var(--rose-mid);padding:.85rem 2rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;cursor:pointer;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;}
+.btn-outline:hover{border-color:var(--rose-deep);transform:translateY(-2px);}
+.hero-trust{margin-top:2.5rem;display:flex;align-items:center;gap:1.5rem;}
+.trust-item{display:flex;align-items:center;gap:.5rem;font-size:13px;color:var(--mist);}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--sage-mid);}
+
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;padding:2rem;}
+.mascot-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.mascot-bg-ring{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,#FFE8F0 0%,#F8F0FF 60%,transparent 100%);opacity:.6;}
+.mascot-bg-ring2{position:absolute;width:340px;height:340px;border-radius:50%;background:rgba(136,204,136,.12);}
+.mascot-svg{position:relative;z-index:2;filter:drop-shadow(0 18px 32px rgba(212,112,138,.18));}
+.float-card{position:absolute;background:var(--white);border:1px solid rgba(242,184,198,.5);border-radius:16px;padding:.8rem 1.1rem;font-size:13px;box-shadow:0 4px 20px rgba(212,112,138,.1);display:flex;align-items:center;gap:.6rem;z-index:3;white-space:nowrap;}
+.float-card.top-right{top:60px;right:-20px;animation:floatA 5s ease-in-out infinite;}
+.float-card.bot-left{bottom:80px;left:-30px;animation:floatB 6s ease-in-out infinite;}
+.float-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.float-icon.green{background:var(--sage-pale);}
+.float-icon.rose{background:var(--blush-soft);}
+.float-card-text{font-weight:400;color:var(--bark-light);font-size:12px;}
+.float-card-text strong{display:block;font-weight:500;color:var(--bark);font-size:13px;}
+@keyframes floatA{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes floatB{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+/* HOW IT WORKS */
+.section-how{padding:6rem 5rem;background:var(--white);}
+.section-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep);font-weight:500;margin-bottom:.9rem;}
+.section-title{font-family:'Cormorant Garant',serif;font-weight:300;font-size:clamp(1.9rem,3vw,2.8rem);color:var(--bark);margin-bottom:1.2rem;line-height:1.2;}
+.section-title em{font-style:italic;color:var(--rose-deep);}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3.5rem;}
+.how-step{position:relative;padding:2.2rem 1.8rem;border-radius:24px;background:var(--cream);border:1px solid rgba(242,184,198,.3);transition:transform .3s,box-shadow .3s;}
+.how-step:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(212,112,138,.1);}
+.how-step-num{font-family:'Cormorant Garant',serif;font-size:4rem;font-weight:300;color:var(--rose);line-height:1;margin-bottom:1rem;letter-spacing:-.02em;}
+.how-step h3{font-family:'Cormorant Garant',serif;font-size:1.3rem;font-weight:400;color:var(--bark);margin-bottom:.7rem;}
+.how-step p{font-size:14px;line-height:1.8;color:var(--mist);}
+.how-step-tag{display:inline-block;background:var(--sage-pale);color:var(--sage-deep);font-size:11px;font-weight:500;padding:.3rem .8rem;border-radius:100px;margin-bottom:1rem;letter-spacing:.05em;}
+
+/* CONVERSATION DEMO */
+.section-demo{padding:6rem 5rem;background:var(--blush-soft);}
+.demo-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.chat-ui{background:var(--white);border-radius:28px;border:1px solid rgba(242,184,198,.5);overflow:hidden;box-shadow:0 20px 60px rgba(212,112,138,.12);}
+.chat-topbar{background:var(--blush-soft);padding:1rem 1.4rem;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(242,184,198,.3);}
+.chat-topbar-name{font-weight:500;font-size:14px;color:var(--bark);}
+.chat-status-row{display:flex;align-items:center;gap:5px;}
+.chat-dot{width:7px;height:7px;border-radius:50%;background:var(--sage-deep);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.chat-body{padding:1.5rem;display:flex;flex-direction:column;gap:1rem;}
+.msg-luma{display:flex;gap:8px;align-items:flex-end;max-width:88%;}
+.bubble-luma{background:var(--blush-soft);border-radius:18px;border-bottom-left-radius:4px;padding:.75rem 1rem;font-size:14px;color:var(--bark);line-height:1.65;font-weight:300;}
+.msg-user{display:flex;justify-content:flex-end;}
+.bubble-user{background:var(--rose-deep);border-radius:18px;border-bottom-right-radius:4px;padding:.75rem 1rem;font-size:14px;color:var(--white);line-height:1.65;font-weight:300;max-width:78%;}
+.chat-input-row{padding:1rem 1.4rem;border-top:1px solid rgba(242,184,198,.3);display:flex;align-items:center;gap:.7rem;}
+.chat-input-fake{flex:1;background:var(--cream);border-radius:100px;padding:.6rem 1.1rem;font-size:13px;color:var(--mist);border:1px solid rgba(242,184,198,.4);}
+.chat-send{width:34px;height:34px;border-radius:50%;background:var(--sage-deep);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.chat-send svg{width:14px;height:14px;stroke:white;fill:none;stroke-width:2;}
+.typing-ind{display:flex;gap:5px;align-items:center;padding:.6rem .9rem;background:var(--blush-soft);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;}
+.typing-ind span{width:6px;height:6px;border-radius:50%;background:var(--rose-mid);animation:bounce 1.2s ease-in-out infinite;}
+.typing-ind span:nth-child(2){animation-delay:.2s;}
+.typing-ind span:nth-child(3){animation-delay:.4s;}
+@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-5px);}}
+.demo-text .section-label{margin-bottom:.7rem;}
+.demo-text p{font-size:15px;line-height:1.85;color:var(--mist);margin-bottom:1.2rem;}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:.9rem;margin:1.8rem 0 2rem;}
+.feature-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--bark-light);}
+.feat-check{width:20px;height:20px;border-radius:50%;background:var(--sage-pale);border:1px solid var(--sage-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.feat-check svg{width:10px;height:10px;stroke:var(--sage-deep);fill:none;stroke-width:2.5;}
+
+/* FEATURES */
+.section-features{padding:6rem 5rem;background:var(--white);}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;}
+.feat-card{border-radius:22px;padding:2rem 1.6rem;border:1px solid transparent;transition:transform .3s;}
+.feat-card:hover{transform:translateY(-3px);}
+.feat-card.rose-card{background:#FFF0F5;border-color:rgba(242,184,198,.5);}
+.feat-card.green-card{background:#F0FBF0;border-color:rgba(136,204,136,.4);}
+.feat-card.mixed-card{background:linear-gradient(135deg,#FFF8FC 0%,#F0FBF0 100%);border-color:rgba(168,216,168,.4);}
+.feat-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
+.feat-icon.rose-icon{background:var(--blush-soft);}
+.feat-icon.green-icon{background:var(--sage-pale);}
+.feat-icon svg{width:20px;height:20px;}
+.feat-card h3{font-family:'Cormorant Garant',serif;font-size:1.2rem;font-weight:400;color:var(--bark);margin-bottom:.6rem;}
+.feat-card p{font-size:13.5px;line-height:1.75;color:var(--mist);}
+
+/* TESTIMONIALS */
+.section-testimonials{padding:6rem 5rem;background:var(--cream);}
+.t-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.t-card{background:var(--white);border-radius:20px;padding:1.8rem 1.6rem;border:1px solid rgba(242,184,198,.3);}
+.t-stars{color:var(--rose-mid);letter-spacing:3px;font-size:13px;margin-bottom:.9rem;}
+.t-quote{font-family:'Cormorant Garant',serif;font-style:italic;font-size:1.05rem;line-height:1.7;color:var(--bark-light);margin-bottom:1.1rem;font-weight:300;}
+.t-author-row{display:flex;align-items:center;gap:.7rem;}
+.t-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;}
+.t-avatar.a1{background:var(--blush-soft);color:var(--rose-deep);}
+.t-avatar.a2{background:var(--sage-pale);color:var(--sage-deep);}
+.t-avatar.a3{background:#F0E8FF;color:#7050B8;}
+.t-author-name{font-size:13px;font-weight:500;color:var(--bark);}
+.t-author-sub{font-size:12px;color:var(--mist);}
+
+/* CTA */
+.section-cta{padding:7rem 5rem;text-align:center;background:var(--rose-deep);position:relative;overflow:hidden;}
+.cta-bg-orbs{position:absolute;inset:0;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;opacity:.15;}
+.orb1{width:500px;height:500px;background:var(--rose);top:-150px;left:-100px;}
+.orb2{width:400px;height:400px;background:var(--sage);bottom:-100px;right:-80px;}
+.section-cta .section-label{color:rgba(255,255,255,.6);}
+.section-cta h2{font-family:'Cormorant Garant',serif;font-weight:300;font-size:clamp(2rem,3.5vw,3rem);color:var(--white);margin-bottom:1.1rem;line-height:1.2;}
+.section-cta h2 em{font-style:italic;}
+.section-cta p{font-size:16px;line-height:1.8;color:rgba(255,255,255,.75);max-width:440px;margin:0 auto 2.5rem;}
+.btn-white{background:var(--white);color:var(--rose-deep);border:none;padding:1rem 2.4rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:transform .2s,box-shadow .2s;display:inline-block;text-decoration:none;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15);}
+.cta-note{margin-top:1.2rem;font-size:13px;color:rgba(255,255,255,.5);}
+
+/* FOOTER */
+footer{background:var(--bark);padding:2.5rem 5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.foot-logo-text{font-family:'Cormorant Garant',serif;font-size:20px;font-weight:400;color:#D4A0B0;letter-spacing:.03em;}
+.foot-logo-text span{color:var(--sage-mid);}
+.foot-links{display:flex;gap:2rem;}
+.foot-links a{text-decoration:none;color:#7A5878;font-size:13px;transition:color .25s;}
+.foot-links a:hover{color:#D4A0B0;}
+.foot-disc{font-size:12px;color:#5A3A48;font-weight:300;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .hero{grid-template-columns:1fr;padding:5rem 1.5rem 3rem;text-align:center;}
+  .hero-left{padding:0;align-items:center;}
+  .hero-right{padding:2rem 0;}
+  .mascot-bg-ring{width:320px;height:320px;}
+  .mascot-bg-ring2{width:260px;height:260px;}
+  .section-how,.section-demo,.section-features,.section-testimonials,.section-cta{padding:4rem 1.5rem;}
+  .how-grid,.feat-grid,.t-grid{grid-template-columns:1fr;}
+  .demo-inner{grid-template-columns:1fr;}
+  .t-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start;}
+  .float-card.top-right{right:0;}
+  .float-card.bot-left{left:0;}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <circle cx="17" cy="17" r="16" fill="#FFF0F5" stroke="#F2B8C6" stroke-width="1.2"/>
+      <ellipse cx="17" cy="19" rx="8.5" ry="7.5" fill="#D4708A"/>
+      <circle cx="13.5" cy="17.5" r="2.6" fill="#FFF0F5"/>
+      <circle cx="20.5" cy="17.5" r="2.6" fill="#FFF0F5"/>
+      <circle cx="14.1" cy="17.2" r="1.1" fill="#4A2A3A"/>
+      <circle cx="21.1" cy="17.2" r="1.1" fill="#4A2A3A"/>
+      <path d="M13 22Q17 24.5 21 22" stroke="#FFF0F5" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+      <ellipse cx="10" cy="19" rx="2" ry="3" fill="#D4708A"/>
+      <ellipse cx="24" cy="19" rx="2" ry="3" fill="#D4708A"/>
+      <ellipse cx="17" cy="11" rx="4" ry="3.5" fill="#F2C4D0"/>
+      <ellipse cx="13.5" cy="9.5" rx="2" ry="2.8" fill="#F2C4D0" transform="rotate(-15 13.5 9.5)"/>
+      <ellipse cx="20.5" cy="9.5" rx="2" ry="2.8" fill="#F2C4D0" transform="rotate(15 20.5 9.5)"/>
+      <!-- green leaf on head -->
+      <ellipse cx="14" cy="7" rx="2.8" ry="1.6" fill="#88CC88" transform="rotate(-30 14 7)" opacity="0.95"/>
+      <ellipse cx="18" cy="6" rx="2.8" ry="1.6" fill="#6ABD82" transform="rotate(10 18 6)" opacity="0.95"/>
+    </svg>
+    <span class="nav-logo-text">thera<span>seek.ai</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#how">Unique</a>
+    <a href="#features">Solution</a>
+    <a href="#stories">Stories</a>
+    <a href="#" class="nav-cta">Talk to Luma</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Luma is here now
+    </div>
+    <h1>A gentle voice<br/>when you need<br/>one <em>most</em></h1>
+    <p class="hero-sub">A voice-first natural language AI therapy companion that listens, responds naturally, and remembers your story over time. No appointments, no waitlists, no stigma. Just open your phone and talk.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Begin talking to Luma</a>
+      <a href="#how" class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6.5"/><path d="M6.5 6C6.5 5.2 7.2 4.5 8 4.5S9.5 5.2 9.5 6c0 1-1.5 1.5-1.5 2.5"/><circle cx="8" cy="11" r=".6" fill="currentColor"/></svg>
+        See how it works
+      </a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><div class="trust-dot"></div>No judgment, ever</div>
+      <div class="trust-item"><div class="trust-dot"></div>Always private</div>
+      <div class="trust-item"><div class="trust-dot"></div>Free to start</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="mascot-wrap">
+      <div class="mascot-bg-ring"></div>
+      <div class="mascot-bg-ring2"></div>
+
+      <!-- Full Luma Mascot SVG -->
+      <svg class="mascot-svg" width="340" height="380" viewBox="0 0 680 650" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bodyG" cx="50%" cy="60%" r="50%"><stop offset="0%" stop-color="#FADADD"/><stop offset="100%" stop-color="#F2B8C6"/></radialGradient>
+          <radialGradient id="bellyG" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="100%" stop-color="#FFF0F5" stop-opacity="0.8"/></radialGradient>
+          <radialGradient id="eyeG" cx="30%" cy="30%" r="60%"><stop offset="0%" stop-color="#4A2A3A"/><stop offset="100%" stop-color="#2A1020"/></radialGradient>
+          <radialGradient id="leafG" cx="40%" cy="30%" r="65%"><stop offset="0%" stop-color="#A8D8A8"/><stop offset="100%" stop-color="#5CAA72"/></radialGradient>
+          <radialGradient id="leafG2" cx="60%" cy="30%" r="65%"><stop offset="0%" stop-color="#B8E0B8"/><stop offset="100%" stop-color="#6ABD82"/></radialGradient>
+          <filter id="lumaShadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#D4708A" flood-opacity="0.16"/></filter>
+        </defs>
+        <!-- bg glow -->
+        <circle cx="340" cy="330" r="220" fill="#FFE8F0" opacity="0.3"/>
+        <!-- EARS -->
+        <ellipse cx="255" cy="155" rx="40" ry="85" fill="#F2B8C6" filter="url(#lumaShadow)" transform="rotate(-12 255 155)"/>
+        <ellipse cx="255" cy="162" rx="24" ry="63" fill="url(#leafG)" transform="rotate(-12 255 162)" opacity="0.9"/>
+        <path d="M248 205 Q252 170 256 130" stroke="#4A9A60" stroke-width="1.3" fill="none" opacity="0.4" stroke-linecap="round" transform="rotate(-12 252 170)"/>
+        <ellipse cx="425" cy="155" rx="40" ry="85" fill="#F2B8C6" filter="url(#lumaShadow)" transform="rotate(12 425 155)"/>
+        <ellipse cx="425" cy="162" rx="24" ry="63" fill="url(#leafG2)" transform="rotate(12 425 162)" opacity="0.9"/>
+        <path d="M432 205 Q428 170 424 130" stroke="#4A9A60" stroke-width="1.3" fill="none" opacity="0.4" stroke-linecap="round" transform="rotate(12 428 170)"/>
+        <ellipse cx="244" cy="92" rx="10" ry="14" fill="#6ABD82" transform="rotate(-18 244 92)" opacity="0.9"/>
+        <ellipse cx="436" cy="92" rx="10" ry="14" fill="#6ABD82" transform="rotate(18 436 92)" opacity="0.9"/>
+        <!-- BODY -->
+        <ellipse cx="340" cy="400" rx="118" ry="98" fill="url(#bodyG)" filter="url(#lumaShadow)"/>
+        <!-- HEAD -->
+        <circle cx="340" cy="300" r="122" fill="url(#bodyG)" filter="url(#lumaShadow)"/>
+        <ellipse cx="308" cy="254" rx="44" ry="30" fill="#ffffff" opacity="0.2" transform="rotate(-20 308 254)"/>
+        <!-- BELLY -->
+        <ellipse cx="340" cy="412" rx="74" ry="62" fill="url(#bellyG)"/>
+        <!-- EYES -->
+        <ellipse cx="302" cy="288" rx="27" ry="29" fill="#ffffff"/>
+        <ellipse cx="378" cy="288" rx="27" ry="29" fill="#ffffff"/>
+        <circle cx="304" cy="290" r="19" fill="url(#eyeG)"/>
+        <circle cx="380" cy="290" r="19" fill="url(#eyeG)"/>
+        <circle cx="304" cy="290" r="10.5" fill="#1A0818"/>
+        <circle cx="380" cy="290" r="10.5" fill="#1A0818"/>
+        <circle cx="310" cy="283" r="5.5" fill="#ffffff"/>
+        <circle cx="386" cy="283" r="5.5" fill="#ffffff"/>
+        <circle cx="298" cy="296" r="2.8" fill="#ffffff" opacity="0.7"/>
+        <circle cx="374" cy="296" r="2.8" fill="#ffffff" opacity="0.7"/>
+        <!-- LASHES -->
+        <line x1="281" y1="271" x2="274" y2="263" stroke="#D47090" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="291" y1="266" x2="287" y2="257" stroke="#D47090" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="303" y1="263" x2="302" y2="253" stroke="#D47090" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="357" y1="266" x2="353" y2="257" stroke="#D47090" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="369" y1="263" x2="368" y2="253" stroke="#D47090" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="399" y1="271" x2="406" y2="263" stroke="#D47090" stroke-width="1.8" stroke-linecap="round"/>
+        <!-- CHEEKS -->
+        <ellipse cx="272" cy="316" rx="27" ry="17" fill="#F4A0B8" opacity="0.42"/>
+        <ellipse cx="408" cy="316" rx="27" ry="17" fill="#F4A0B8" opacity="0.42"/>
+        <!-- NOSE -->
+        <ellipse cx="340" cy="323" rx="9.5" ry="7" fill="#E87090"/>
+        <ellipse cx="337" cy="320" rx="3.8" ry="2.8" fill="#ffffff" opacity="0.55"/>
+        <!-- MOUTH -->
+        <path d="M326 334 Q340 347 354 334" stroke="#D4607A" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+        <circle cx="323" cy="333" r="2.2" fill="#E87090" opacity="0.5"/>
+        <circle cx="357" cy="333" r="2.2" fill="#E87090" opacity="0.5"/>
+        <!-- WHISKERS -->
+        <line x1="258" y1="322" x2="314" y2="327" stroke="#D4A0B8" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="256" y1="332" x2="313" y2="332" stroke="#D4A0B8" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="260" y1="342" x2="314" y2="337" stroke="#D4A0B8" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="422" y1="322" x2="366" y2="327" stroke="#D4A0B8" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="424" y1="332" x2="367" y2="332" stroke="#D4A0B8" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+        <line x1="420" y1="342" x2="366" y2="337" stroke="#D4A0B8" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+        <!-- ARMS -->
+        <ellipse cx="222" cy="388" rx="29" ry="44" fill="#F2B8C6" transform="rotate(-25 222 388)"/>
+        <ellipse cx="205" cy="416" rx="17" ry="13" fill="#E8A0B8" transform="rotate(-25 205 416)"/>
+        <circle cx="197" cy="412" r="4.2" fill="#F9C8D8"/>
+        <circle cx="207" cy="408" r="4.2" fill="#F9C8D8"/>
+        <circle cx="215" cy="411" r="4.2" fill="#F9C8D8"/>
+        <ellipse cx="458" cy="388" rx="29" ry="44" fill="#F2B8C6" transform="rotate(25 458 388)"/>
+        <ellipse cx="475" cy="416" rx="17" ry="13" fill="#E8A0B8" transform="rotate(25 475 416)"/>
+        <circle cx="466" cy="411" r="4.2" fill="#F9C8D8"/>
+        <circle cx="475" cy="408" r="4.2" fill="#F9C8D8"/>
+        <circle cx="483" cy="412" r="4.2" fill="#F9C8D8"/>
+        <!-- FEET -->
+        <ellipse cx="290" cy="474" rx="44" ry="23" fill="#F2B8C6"/>
+        <ellipse cx="278" cy="478" rx="30" ry="15" fill="#E8A0B8"/>
+        <circle cx="264" cy="476" r="5.2" fill="#F9C8D8"/>
+        <circle cx="277" cy="473" r="5.2" fill="#F9C8D8"/>
+        <circle cx="290" cy="472" r="5.2" fill="#F9C8D8"/>
+        <ellipse cx="390" cy="474" rx="44" ry="23" fill="#F2B8C6"/>
+        <ellipse cx="402" cy="478" rx="30" ry="15" fill="#E8A0B8"/>
+        <circle cx="390" cy="472" r="5.2" fill="#F9C8D8"/>
+        <circle cx="403" cy="473" r="5.2" fill="#F9C8D8"/>
+        <circle cx="416" cy="476" r="5.2" fill="#F9C8D8"/>
+        <!-- TAIL -->
+        <circle cx="340" cy="482" r="19" fill="#ffffff" opacity="0.85"/>
+        <circle cx="340" cy="482" r="13" fill="#FFF5F8"/>
+        <!-- LEAF BOW -->
+        <ellipse cx="310" cy="192" rx="19" ry="11" fill="#6ABD82" transform="rotate(-30 310 192)" opacity="0.95"/>
+        <ellipse cx="330" cy="186" rx="19" ry="11" fill="#88CC88" transform="rotate(10 330 186)" opacity="0.95"/>
+        <circle cx="320" cy="191" r="6.5" fill="#A8D8A8"/>
+        <circle cx="320" cy="191" r="4" fill="#6ABD82"/>
+        <!-- sparkles -->
+        <circle cx="165" cy="200" r="5" fill="#88CC88"/>
+        <circle cx="165" cy="200" r="2" fill="#fff"/>
+        <circle cx="528" cy="220" r="4.5" fill="#F4A0B8"/>
+        <circle cx="528" cy="220" r="1.8" fill="#fff"/>
+        <circle cx="182" cy="445" r="3.5" fill="#88CC88"/>
+        <circle cx="512" cy="435" r="4" fill="#F4A0B8"/>
+        <text x="148" y="378" font-size="14" fill="#F4A0B8" opacity="0.7">♡</text>
+        <text x="516" y="385" font-size="12" fill="#88CC88" opacity="0.7">♡</text>
+        <text x="200" y="508" font-size="11" fill="#88CC88" opacity="0.6">✦</text>
+        <text x="470" y="505" font-size="11" fill="#F4A0B8" opacity="0.6">✦</text>
+      </svg>
+
+      <!-- Floating cards -->
+      <div class="float-card top-right">
+        <div class="float-icon green">🌿</div>
+        <div>
+          <div class="float-card-text"><strong>Breathing exercise</strong>4-7-8 technique ready</div>
+        </div>
+      </div>
+      <div class="float-card bot-left">
+        <div class="float-icon rose">💬</div>
+        <div>
+          <div class="float-card-text"><strong>Luma is listening</strong>Say anything, no judgment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-how" id="how">
+  <div class="section-label">what makes it unique</div>
+  <div class="section-title">Privacy-first with <em>no trade-offs</em></div>
+  <p style="font-size:15px;color:var(--mist);line-height:1.8;max-width:600px;margin-bottom:2rem;">Other apps promise privacy and cut corners elsewhere. We don't compromise on either — and our privacy isn't a policy, it's a system that physically can't leak.</p>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-step-tag">on-device</div>
+      <h3>Full on-device STT/TTS</h3>
+      <p>Audio never leaves the phone. Whisper.cpp ensures no audio is sent, and Piper keeps audio entirely local.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-tag">self-hosted</div>
+      <h3>Fine-tuned LLM</h3>
+      <p>Not a generic API. Reverse proxy with no body logging, and LLM inference with absolutely no persistence.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-tag">sync</div>
+      <h3>Zero-knowledge encrypted</h3>
+      <p>Even we can't read user backups. Memory store is completely SQLCipher encrypted.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-tag">memory</div>
+      <h3>Smart long-term memory</h3>
+      <p>Persistent user profile with intelligent compaction, not just standard chat history.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FEATURES -->
+<section class="section-features" id="features">
+  <div class="section-label">why theraseek.ai</div>
+  <div class="section-title">Designed for your <em>peace of mind</em></div>
+  <p style="font-size:15px;color:var(--mist);line-height:1.8;max-width:600px;margin-top:.5rem;">A truly private, voice-first companion that's always ready to listen.</p>
+  <div class="feat-grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="feat-card rose-card">
+      <div class="feat-icon rose-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#D4708A" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3>Always available</h3>
+      <p>No appointments or waiting rooms. Theraseek.ai is ready whenever you need a moment of clarity or support.</p>
+    </div>
+    <div class="feat-card green-card">
+      <div class="feat-icon green-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5CAA72" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3>Deep listening</h3>
+      <p>Our voice-first approach means Luma hears not just what you say, but how you say it, responding with true empathy.</p>
+    </div>
+    <div class="feat-card mixed-card">
+      <div class="feat-icon green-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5CAA72" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h3>100% Private</h3>
+      <p>Your conversations are processed locally and securely encrypted. No data is stored on our servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-testimonials" id="stories">
+  <div class="t-header">
+    <div>
+      <div class="section-label">what people say</div>
+      <div class="section-title">Words from those who <em>found their way</em></div>
+    </div>
+  </div>
+  <div class="t-grid">
+    <div class="t-card">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"I used to dread nights most. Now I open Theraseek.ai and somehow the weight lifts just a little. Luma doesn't fix anything — she just makes it feel less alone."</p>
+      <div class="t-author-row">
+        <div class="t-avatar a1">M</div>
+        <div>
+          <div class="t-author-name">Maya, 29</div>
+          <div class="t-author-sub">Using Theraseek.ai for 4 months</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"It never makes me feel broken. It just meets me where I am. That's more than I expected from an app. That's more than some people have given me."</p>
+      <div class="t-author-row">
+        <div class="t-avatar a2">D</div>
+        <div>
+          <div class="t-author-name">Daniel, 34</div>
+          <div class="t-author-sub">Using Theraseek.ai for 2 months</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Luma helped me realize I wasn't imagining how hard things were. That alone helped so much. Having something say 'yes, that sounds really difficult' — it matters."</p>
+      <div class="t-author-row">
+        <div class="t-avatar a3">S</div>
+        <div>
+          <div class="t-author-name">Sarah, 41</div>
+          <div class="t-author-sub">Using Theraseek.ai for 6 months</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta">
+  <div class="cta-bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+  </div>
+  <div style="position:relative;z-index:2;">
+    <div class="section-label">you are not alone</div>
+    <h2>The first step can be<br/>the <em>smallest</em> one</h2>
+    <p>You don't need the right words or a full explanation. Just open a conversation — Luma will meet you exactly where you are.</p>
+    <a href="#" class="btn-white">Begin when you're ready</a>
+    <div class="cta-note">Free to start · No credit card · Always private</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="28" height="28" viewBox="0 0 34 34" fill="none">
+      <circle cx="17" cy="17" r="16" fill="#5A3A48" stroke="#7A5060" stroke-width="1.2"/>
+      <ellipse cx="17" cy="19" rx="8" ry="7" fill="#D4A0B0"/>
+      <circle cx="13.5" cy="17.5" r="2.4" fill="#FFF0F5"/>
+      <circle cx="20.5" cy="17.5" r="2.4" fill="#FFF0F5"/>
+      <circle cx="14" cy="17.2" r="1" fill="#4A2A3A"/>
+      <circle cx="21" cy="17.2" r="1" fill="#4A2A3A"/>
+      <path d="M13 22Q17 24 21 22" stroke="#FFF0F5" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <ellipse cx="10" cy="19" rx="1.8" ry="2.8" fill="#D4A0B0"/>
+      <ellipse cx="24" cy="19" rx="1.8" ry="2.8" fill="#D4A0B0"/>
+      <ellipse cx="17" cy="11" rx="4" ry="3.5" fill="#F2C4D0" opacity="0.7"/>
+      <ellipse cx="13.5" cy="9.5" rx="2" ry="2.8" fill="#F2C4D0" opacity="0.7" transform="rotate(-15 13.5 9.5)"/>
+      <ellipse cx="20.5" cy="9.5" rx="2" ry="2.8" fill="#F2C4D0" opacity="0.7" transform="rotate(15 20.5 9.5)"/>
+      <ellipse cx="14" cy="7.5" rx="2.5" ry="1.4" fill="#6ABD82" transform="rotate(-28 14 7.5)" opacity="0.85"/>
+      <ellipse cx="18.5" cy="6.8" rx="2.5" ry="1.4" fill="#88CC88" transform="rotate(10 18.5 6.8)" opacity="0.85"/>
+    </svg>
+    <span class="foot-logo-text">thera<span>seek.ai</span></span>
+  </div>
+  <div class="foot-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Crisis resources</a>
+    <a href="#">About</a>
+  </div>
+  <div class="foot-disc">Not a replacement for professional therapy or crisis support.</div>
+</footer>
+
+</body>
+</html>

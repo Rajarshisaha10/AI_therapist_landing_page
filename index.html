@@ -118,7 +118,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .privacy-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.08);max-width:1100px;margin:0 auto;}
 .privacy-pillar{padding:2.8rem 2.2rem;border-right:1px solid rgba(255,255,255,0.08);}
 .privacy-pillar:last-child{border-right:none;}
-.pillar-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:400;color:rgba(201,168,196,0.15);line-height:1;margin-bottom:1.1rem;}
+.pillar-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:400;color:rgba(201,168,196,0.6);line-height:1;margin-bottom:1.1rem;}
 .pillar-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;color:#fff;margin-bottom:.55rem;}
 .pillar-body{font-size:13px;line-height:1.75;color:rgba(255,255,255,0.48);font-weight:300;}
 .privacy-quote-bar{max-width:1100px;margin:0 auto;padding:2.5rem 3rem;border-top:1px solid rgba(255,255,255,0.08);}
@@ -192,7 +192,7 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
     <li><a href="#how">How it works</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#privacy">Privacy</a></li>
-    <li><a href="#stories">Stories</a></li>
+
     <li><a href="#waitlist" class="btn-nav">Join waitlist</a></li>
   </ul>
 </nav>
@@ -202,7 +202,8 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
   <div class="hero-left">
     <div class="hero-label">100% Private AI &middot; Coming soon</div>
     <h1>Someone to talk to,<br><em>whenever</em> it gets<br>heavy.</h1>
-    <p class="hero-sub">Always awake. Never judging. Seeker is your gentle AI companion — here for the hard days, the 3am spirals, and everything in between.</p>
+    <p class="hero-sub" style="margin-bottom:1.2rem; color: var(--plum-mid); font-weight: 500;">Because typing how you feel at 2am is harder than it sounds, just talk naturally.</p>
+    <p class="hero-sub">Always awake. Never judging. Your gentle AI companion — here for the hard days, the 3am spirals, and everything in between.</p>
     <div class="email-row">
       <input type="email" placeholder="you@email.com" aria-label="Email address"/>
       <button class="btn-notify">Notify me &rarr;</button>
@@ -212,7 +213,7 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
   <div class="hero-right">
     <div class="mascot-stage">
       <div class="mascot-halo"></div>
-      <img class="mascot-img" src="./mascot.png" alt="Seeker, your Theraseek companion"/>
+      <img class="mascot-img" src="./mascot.png" alt="Theraseek, your Theraseek companion"/>
     </div>
   </div>
   <div class="scroll-hint"><div class="scroll-mouse"></div></div>
@@ -230,7 +231,7 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
 <div class="privacy-dark" id="privacy">
   <div class="privacy-statement">
     <div class="privacy-eyebrow"><div class="privacy-eyebrow-line"></div>Your privacy<div class="privacy-eyebrow-line"></div></div>
-    <h2 class="privacy-h2">What you tell Seeker<br>stays with <em>you.</em></h2>
+    <h2 class="privacy-h2">What you tell Theraseek<br>stays with <em>you.</em></h2>
     <p class="privacy-sub">We didn&rsquo;t want to write another privacy policy and hope you trust it. So we built a system that physically cannot betray you — no policy required, because the architecture doesn&rsquo;t allow it.</p>
   </div>
   <div class="privacy-pillars">
@@ -242,7 +243,7 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
     <div class="privacy-pillar">
       <div class="pillar-num">02</div>
       <div class="pillar-title">No cloud AI processing</div>
-      <p class="pillar-body">Seeker runs a self-hosted, fine-tuned model locally on your device. There are no calls to OpenAI, no third-party APIs, no server-side logs.</p>
+      <p class="pillar-body">Theraseek runs a self-hosted, fine-tuned model locally on your device. There are no calls to OpenAI, no third-party APIs, no server-side logs.</p>
     </div>
     <div class="privacy-pillar">
       <div class="pillar-num">03</div>
@@ -251,8 +252,8 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
     </div>
     <div class="privacy-pillar">
       <div class="pillar-num">04</div>
-      <div class="pillar-title">Memory stays on your device</div>
-      <p class="pillar-body">Seeker&rsquo;s understanding of you is stored encrypted on your phone, not in the cloud. Delete the app and it&rsquo;s gone — no trace, no backup we&rsquo;re holding.</p>
+      <div class="pillar-title">Encrypted local memory</div>
+      <p class="pillar-body">Theraseek&rsquo;s understanding of you is stored encrypted on your phone. Backups for device migration are strictly opt-in&mdash;unless you choose otherwise, your data never leaves your device.</p>
     </div>
   </div>
   <div class="privacy-quote-bar">
@@ -265,23 +266,23 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
 <div class="section-wrap">
   <div class="intro-two-col">
     <div>
-      <div class="eyebrow"><div class="eyebrow-line"></div>Meet Seeker</div>
+      <div class="eyebrow"><div class="eyebrow-line"></div>Meet Theraseek</div>
       <p class="intro-quote">You don&rsquo;t always need a therapist. Sometimes you just need someone to <em>actually listen.</em></p>
-      <p class="intro-body">Seeker is a voice-first AI companion built for those moments when things feel too heavy to carry alone — but you&rsquo;re not ready (or able) to call someone. No appointments. No waitlists. No script. Just an open conversation, whenever you need it.</p>
-      <p class="intro-body">Think of Seeker less like an app and more like that one friend who picks up at midnight, asks the right questions, and never makes you feel like a burden.</p>
+      <p class="intro-body">Theraseek is a voice-first AI companion built for those moments when things feel too heavy to carry alone — but you&rsquo;re not ready (or able) to call someone. No appointments. No waitlists. No script. Just an open conversation, whenever you need it.</p>
+      <p class="intro-body">Think of Theraseek less like an app and more like that one friend who picks up at midnight, asks the right questions, and never makes you feel like a burden.</p>
     </div>
     <div class="intro-right">
       <div class="intro-card">
         <div class="intro-card-label">Voice-first</div>
-        <p>Just talk. Seeker listens and responds in a warm, natural voice — because typing how you feel at 2am is harder than it sounds.</p>
+        <p>Just talk. Theraseek listens and responds in a warm, natural voice — because typing how you feel at 2am is harder than it sounds.</p>
       </div>
       <div class="intro-card">
         <div class="intro-card-label">Remembers you</div>
-        <p>Seeker builds a quiet understanding of who you are over time — your patterns, your wins, what weighs on you — so you never have to start from scratch.</p>
+        <p>Theraseek builds a quiet understanding of who you are over time — your patterns, your wins, what weighs on you — so you never have to start from scratch.</p>
       </div>
       <div class="intro-card">
         <div class="intro-card-label">Completely private</div>
-        <p>Everything stays on your device. Not stored on our servers, not processed in the cloud. What you share with Seeker stays with Seeker.</p>
+        <p>Everything stays on your device. Not stored on our servers, not processed in the cloud. What you share with Theraseek stays with Theraseek.</p>
       </div>
     </div>
   </div>
@@ -298,19 +299,19 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
         <div class="step-num">01</div>
         <div class="step-rule"></div>
         <h3>Just say what&rsquo;s on your mind</h3>
-        <p>Open Theraseek and start talking — or typing, if that&rsquo;s easier. There&rsquo;s no intake questionnaire, no right way to begin. Seeker meets you exactly where you are.</p>
+        <p>Open Theraseek and start talking — or typing, if that&rsquo;s easier. There&rsquo;s no intake questionnaire, no right way to begin. Theraseek meets you exactly where you are.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
         <div class="step-rule"></div>
         <h3>Feel heard, not handled</h3>
-        <p>Seeker doesn&rsquo;t jump to solutions or run through a checklist. It listens, reflects back what you&rsquo;re feeling, and asks the kind of questions that actually help you think things through.</p>
+        <p>Theraseek doesn&rsquo;t jump to solutions or run through a checklist. It listens, reflects back what you&rsquo;re feeling, and asks the kind of questions that actually help you think things through.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-rule"></div>
         <h3>Come back whenever you need</h3>
-        <p>Seeker quietly learns what matters to you. The more you talk, the more it understands — building a picture of you that makes every conversation feel like a continuation, not a restart.</p>
+        <p>Theraseek quietly learns what matters to you. The more you talk, the more it understands — building a picture of you that makes every conversation feel like a continuation, not a restart.</p>
       </div>
     </div>
   </div>
@@ -319,34 +320,34 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
 <!-- FEATURES -->
 <div style="background:var(--bg);padding:6rem 0;" id="features">
   <div class="section-wrap" style="padding-top:0;padding-bottom:0;">
-    <div class="eyebrow"><div class="eyebrow-line"></div>What Seeker can do</div>
+    <div class="eyebrow"><div class="eyebrow-line"></div>What Theraseek can do</div>
     <h2 class="section-h2">Everything you need.<br><em>Nothing you don&rsquo;t.</em></h2>
-    <p class="section-lead">Seeker isn&rsquo;t trying to be a therapist, a productivity tool, or a wellness tracker. It&rsquo;s just here — calm, available, and always on your side.</p>
+    <p class="section-lead">Theraseek isn&rsquo;t trying to be a therapist, a productivity tool, or a wellness tracker. It&rsquo;s just here — calm, available, and always on your side.</p>
     <div class="feat-grid">
       <div class="feat-card">
         <div class="feat-marker"></div>
         <h3>Talk, don&rsquo;t type</h3>
-        <p>Full on-device voice — your words are processed right on your phone, never sent anywhere. Speak naturally, like you would to a person. Seeker listens and responds out loud.</p>
+        <p>Full on-device voice — your words are processed right on your phone, never sent anywhere. Speak naturally, like you would to a person. Theraseek listens and responds out loud.</p>
       </div>
       <div class="feat-card">
         <div class="feat-marker"></div>
         <h3>Here at 3am</h3>
-        <p>Anxiety doesn&rsquo;t keep office hours. Seeker is available on nights, weekends, and difficult Sundays — no appointment, no waitlist, no &ldquo;I have a slot next Thursday.&rdquo;</p>
+        <p>Anxiety doesn&rsquo;t keep office hours. Theraseek is available on nights, weekends, and difficult Sundays — no appointment, no waitlist, no &ldquo;I have a slot next Thursday.&rdquo;</p>
       </div>
       <div class="feat-card">
         <div class="feat-marker"></div>
         <h3>Grounding &amp; breathwork</h3>
-        <p>When things feel overwhelming, Seeker can walk you through breathing exercises and grounding techniques — small, science-backed tools that bring you back to yourself.</p>
+        <p>When things feel overwhelming, Theraseek can walk you through breathing exercises and grounding techniques — small, science-backed tools that bring you back to yourself.</p>
       </div>
       <div class="feat-card">
         <div class="feat-marker"></div>
         <h3>A gentle mood log</h3>
-        <p>Seeker quietly tracks how you&rsquo;re feeling over time. No charts to fill in — just a growing picture of your patterns, shared with you when it might actually help.</p>
+        <p>Theraseek quietly tracks how you&rsquo;re feeling over time. No charts to fill in — just a growing picture of your patterns, shared with you when it might actually help.</p>
       </div>
       <div class="feat-card">
         <div class="feat-marker"></div>
         <h3>Crisis-aware, always</h3>
-        <p>If Seeker detects signs of serious distress, it surfaces emergency helplines immediately — hardcoded, always on, no AI in the loop. A safety net that never fails.</p>
+        <p>If Theraseek detects signs of serious distress, it surfaces emergency helplines immediately — hardcoded, always on, no AI in the loop. A safety net that never fails.</p>
       </div>
       <div class="feat-card">
         <div class="feat-marker"></div>
@@ -359,43 +360,13 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
 
 
 
-<!-- TESTIMONIALS -->
-<div class="section-wrap" id="stories">
-  <div class="eyebrow"><div class="eyebrow-line"></div>What people say</div>
-  <h2 class="section-h2">Real moments,<br><em>real people.</em></h2>
-  <div class="t-grid">
-    <div class="t-card">
-      <div class="t-stars">&starf;&starf;&starf;&starf;&starf;</div>
-      <p class="t-quote">&ldquo;I used to dread nights most. Now I open Theraseek and somehow the weight shifts a little. That little bit matters more than I can explain.&rdquo;</p>
-      <div class="t-author">&mdash; Maya, 29</div>
-      <div class="t-tag">Anxiety</div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars">&starf;&starf;&starf;&starf;&starf;</div>
-      <p class="t-quote">&ldquo;It doesn&rsquo;t make me feel broken. It just meets me where I am. That&rsquo;s more than I expected &mdash; honestly more than I&rsquo;ve gotten from some human therapists.&rdquo;</p>
-      <div class="t-author">&mdash; Daniel, 34</div>
-      <div class="t-tag">Depression</div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars">&starf;&starf;&starf;&starf;&starf;</div>
-      <p class="t-quote">&ldquo;Seeker helped me realize I wasn&rsquo;t imagining how hard things were. Having that validated &mdash; by something that genuinely listened &mdash; shifted something in me.&rdquo;</p>
-      <div class="t-author">&mdash; Sarah, 41</div>
-      <div class="t-tag">Burnout</div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars">&starf;&starf;&starf;&starf;&starf;</div>
-      <p class="t-quote">&ldquo;I can&rsquo;t talk about feelings easily. The voice mode changed that. It felt like talking to someone real &mdash; non-judgmental in a way that genuinely surprised me.&rdquo;</p>
-      <div class="t-author">&mdash; Arjun, 26</div>
-      <div class="t-tag">Social anxiety</div>
-    </div>
-  </div>
-</div>
+
 
 <!-- CTA -->
 <section class="cta-section" id="waitlist">
-  <img class="cta-mascot" src="./mascot.png" alt="Seeker"/>
+  <img class="cta-mascot" src="./mascot.png" alt="Theraseek"/>
   <h2>Ready when<br><em>you are.</em></h2>
-  <p>No pressure, no commitment. Just drop your email and we&rsquo;ll let you know the moment Seeker is ready to meet you.</p>
+  <p>No pressure, no commitment. Just drop your email and we&rsquo;ll let you know the moment Theraseek is ready to meet you.</p>
   <div class="cta-form">
     <input type="email" placeholder="you@email.com" aria-label="Email"/>
     <button class="btn-notify">Notify me &rarr;</button>

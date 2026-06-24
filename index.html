@@ -4,11 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Theraseek — Your AI Health Companion</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#FBEFE9;
+  --bg:#FFFFFF;
   --card:#FFFDFC;
   --plum:#2A1820;
   --plum-mid:#6E2C3E;
@@ -33,12 +35,32 @@ body{font-family:'DM Sans',sans-serif;background:transparent;color:var(--plum);o
 }
 /* soft veil so text stays readable over the waves */
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(70% 55% at 50% 38%,rgba(251,239,233,.72),rgba(251,239,233,.25) 60%,transparent)}
+  background:radial-gradient(70% 55% at 50% 38%,rgba(255,255,255,.72),rgba(255,255,255,.25) 60%,transparent)}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:rgba(251,239,233,0.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(199,110,127,0.15);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:rgba(255,255,255,0.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(199,110,127,0.15);}
 .logo{display:flex;align-items:center;text-decoration:none;}
-.logo-img{height:44px;width:auto;display:block;}
+.logo-img{height:62px;width:auto;display:block;}
+.text-logo{display:flex;flex-direction:column;align-items:center;position:relative;}
+.logo-main{display:flex;align-items:flex-end;gap:0;position:relative;}
+.logo-mascot{width:50px;height:auto;margin-right:-6px;margin-bottom:-10px;position:relative;z-index:2;}
+.logo-text{font-family:'Playfair Display',serif;font-size:28px;font-weight:500;letter-spacing:-0.01em;line-height:1;}
+.logo-text .thera{color:#9E5D6B;}
+.logo-text .seek{color:#4D5D3E;}
+.logo-tagline{display:flex;align-items:center;gap:6px;margin-top:2px;}
+.logo-tagline-line{width:18px;height:1px;background:#5C4751;opacity:0.4;}
+.logo-tagline-diamond{font-size:6px;color:#9E5D6B;line-height:1;}
+.logo-tagline-text{font-family:'DM Sans',sans-serif;font-size:7.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#5C4751;}
+.foot-text-logo{display:flex;flex-direction:column;align-items:center;}
+.foot-text-logo .logo-main{display:flex;align-items:flex-end;gap:0;position:relative;}
+.foot-text-logo .logo-mascot{width:44px;height:auto;margin-right:-5px;margin-bottom:-8px;position:relative;z-index:2;filter:brightness(1.5);}
+.foot-text-logo .logo-text{font-family:'Playfair Display',serif;font-size:24px;font-weight:500;letter-spacing:-0.01em;line-height:1;}
+.foot-text-logo .logo-text .thera{color:#C9A0A8;}
+.foot-text-logo .logo-text .seek{color:#8FA882;}
+.foot-text-logo .logo-tagline{display:flex;align-items:center;gap:6px;margin-top:2px;}
+.foot-text-logo .logo-tagline-line{width:16px;height:1px;background:rgba(201,168,196,0.4);}
+.foot-text-logo .logo-tagline-diamond{font-size:5px;color:#C9A0A8;line-height:1;}
+.foot-text-logo .logo-tagline-text{font-family:'DM Sans',sans-serif;font-size:6.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,196,0.6);}
 .nav-links{list-style:none;display:flex;align-items:center;gap:2rem;}
 .nav-links a{text-decoration:none;font-size:14px;color:var(--muted);font-weight:400;transition:color .25s;}
 .nav-links a:hover{color:var(--accent);}
@@ -160,7 +182,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* ── FOOTER ── */
 footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.foot-logo{height:36px;width:auto;display:block;filter:brightness(0.85) sepia(0.2);}
+.foot-logo{height:40px;width:auto;display:block;filter:brightness(0.85) sepia(0.2);}
 .foot-links{display:flex;gap:1.8rem;}
 .foot-links a{text-decoration:none;font-size:12px;color:rgba(201,168,196,0.5);transition:color .25s;}
 .foot-links a:hover{color:var(--mauve);}

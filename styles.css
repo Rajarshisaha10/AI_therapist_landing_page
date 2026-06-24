@@ -1,0 +1,120 @@
+/* TheraSeek — interest capture · pink theme + interactive waves */
+:root{
+  --cream:#FBEFE9; --blush:#F3CFC8; --rose:#C76E7F; --rose-deep:#A9415A;
+  --maroon:#6E2C3E; --ink:#2A1820; --ink-soft:#5C4751; --white:#FFFDFC;
+  --font-display:"Fraunces",Georgia,serif; --font-body:"Nunito Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);color:var(--ink);background:var(--cream);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+em{font-style:italic;color:var(--rose-deep)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* animated wave canvas — fixed behind everything */
+#waves{
+  position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;
+  background:
+    radial-gradient(60% 50% at 50% 0%,rgba(243,207,200,.6),transparent 70%),
+    var(--cream);
+}
+/* soft veil so text stays readable over the waves */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(70% 55% at 50% 38%,rgba(251,239,233,.72),rgba(251,239,233,.25) 60%,transparent)}
+
+/* ░ HERO ░ */
+.hero{
+  min-height:100dvh;display:flex;flex-direction:column;
+  padding:1.6rem clamp(1.25rem,5vw,4rem) 4rem;position:relative;
+}
+.logo{height:46px;width:auto;align-self:flex-start;margin-bottom:auto}
+
+.hero__inner{
+  flex:1;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(1.5rem,5vw,4rem);
+  max-width:1180px;width:100%;margin:0 auto;
+}
+.hero__copy{text-align:left}
+
+.hero__art{display:flex;justify-content:center}
+.mascot-wrap{position:relative;width:min(34vw,360px)}
+.mascot-wrap::before{content:"";position:absolute;inset:-12% -8% 0;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle,rgba(243,207,200,.85),rgba(199,110,127,.32) 55%,transparent 72%);filter:blur(6px)}
+.mascot{width:100%;filter:drop-shadow(0 24px 30px rgba(70,48,94,.34));animation:float 6.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+h1{font-family:var(--font-display);font-weight:500;letter-spacing:-.012em;
+  font-size:clamp(2.2rem,5.2vw,3.7rem);line-height:1.04;color:var(--maroon);max-width:15ch}
+.lede{font-size:1.12rem;color:var(--ink-soft);max-width:44ch;margin:1.2rem 0 2rem}
+
+.form{display:flex;gap:.5rem;background:var(--white);padding:.4rem;border-radius:999px;
+  box-shadow:0 16px 36px rgba(154,96,110,.22);max-width:460px;width:100%}
+.form input{flex:1;border:none;background:transparent;padding:.78rem 1rem;font:inherit;color:var(--ink);min-width:0}
+.form input:focus{outline:none}
+.form:focus-within{box-shadow:0 0 0 3px rgba(199,110,127,.4),0 16px 36px rgba(154,96,110,.22)}
+.form button{border:none;cursor:pointer;font:inherit;font-weight:700;color:var(--white);
+  background:var(--rose-deep);border-radius:999px;padding:.78rem 1.4rem;white-space:nowrap;
+  transition:background .2s,transform .2s}
+.form button:hover{background:var(--maroon);transform:translateY(-1px)}
+.form.is-done{display:none}
+
+.hint{font-size:.92rem;color:var(--ink-soft);margin-top:1rem}
+.hint strong{color:var(--maroon)}
+.hint.is-error{color:var(--rose-deep);font-weight:600}
+
+/* scroll cue */
+.scroll-cue{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);
+  width:26px;height:42px;border:2px solid rgba(110,44,62,.45);border-radius:999px;display:grid;place-items:center}
+.scroll-cue span{width:4px;height:8px;border-radius:4px;background:var(--rose-deep);animation:scroll 1.6s ease-in-out infinite}
+@keyframes scroll{0%{transform:translateY(-6px);opacity:0}40%{opacity:1}100%{transform:translateY(10px);opacity:0}}
+
+/* ░ STRIP ░ */
+.strip{max-width:1000px;margin:0 auto;padding:clamp(3.5rem,8vw,6rem) 1.5rem;text-align:center}
+h2{font-family:var(--font-display);font-weight:500;font-size:clamp(1.8rem,4.4vw,2.7rem);color:var(--maroon);letter-spacing:-.01em}
+.strip__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:2.6rem}
+.point{background:rgba(255,253,252,.7);backdrop-filter:blur(6px);border:1px solid rgba(169,65,90,.12);
+  border-radius:22px;padding:1.8rem 1.5rem;text-align:left;box-shadow:0 12px 28px rgba(154,96,110,.12)}
+.point__dot{width:34px;height:34px;border-radius:50%;margin-bottom:1rem;
+  background:radial-gradient(circle at 35% 30%,var(--rose),var(--maroon))}
+.point h3{font-family:var(--font-display);font-weight:500;font-size:1.25rem;color:var(--maroon);margin-bottom:.4rem}
+.point p{color:var(--ink-soft);font-size:1rem}
+
+/* ░ CLOSING ░ */
+.closing{text-align:center;padding:clamp(3rem,7vw,5rem) 1.5rem 4rem;max-width:640px;margin:0 auto}
+.closing p{color:var(--ink-soft);font-size:1.1rem;margin:.7rem 0 1.8rem}
+.btn{display:inline-block;background:var(--rose-deep);color:var(--white);font-weight:700;
+  padding:.95rem 2rem;border-radius:999px;box-shadow:0 14px 30px rgba(169,65,90,.3);transition:background .2s,transform .2s}
+.btn:hover{background:var(--maroon);transform:translateY(-2px)}
+
+.foot{text-align:center;font-size:.82rem;color:var(--ink-soft);opacity:.78;padding:0 1.5rem 2.5rem;max-width:60ch;margin:0 auto}
+
+/* ░ responsive ░ */
+@media (max-width:860px){
+  .hero{align-items:center}
+  .logo{margin:0 auto 1.5rem}
+  .hero__inner{grid-template-columns:1fr;text-align:center;gap:1.4rem;justify-items:center}
+  .hero__copy{text-align:center}
+  .hero__art{order:-1}
+  .mascot-wrap{width:min(52vw,220px)}
+  h1{max-width:18ch;margin:0 auto}
+  .lede{margin-left:auto;margin-right:auto}
+  .form{margin:0 auto}
+  .hint{text-align:center}
+}
+@media (max-width:760px){
+  .strip__grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+}
+@media (max-width:430px){
+  .logo{height:40px}
+  .mascot-wrap{width:min(50vw,170px)}
+  .form{flex-direction:column;border-radius:20px;padding:.55rem;gap:.55rem}
+  .form input{text-align:center;padding:.85rem}
+  .form button{width:100%;padding:.9rem}
+  .form:focus-within{box-shadow:0 0 0 3px rgba(199,110,127,.4),0 16px 36px rgba(154,96,110,.22)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mascot,.scroll-cue span{animation:none}
+}

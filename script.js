@@ -2,60 +2,102 @@
 (function () {
   const initIntro = () => {
     const overlay = document.getElementById('intro-overlay');
-    const phoneScreen = document.querySelector('.phone-screen');
-    const screenGlow = document.querySelector('.screen-glow');
-    const screenParticles = document.querySelector('.screen-particles');
-    const targetMascot = document.querySelector('.mascot-img');
-    const mascotContainer = document.querySelector('.boot-mascot-container');
-    const mascotImg = document.querySelector('.boot-mascot');
+    const glow = document.querySelector('.intro-glow');
+    const logoWrapper = document.querySelector('.intro-logo-wrapper');
+    const targetLogo = document.querySelector('.logo-img');
 
     if (!overlay) return;
 
-    // Boot screen background fades from black to light cream
+    // Scene 1: At 100ms, fade in background radial glow
     setTimeout(() => {
-      if (phoneScreen) phoneScreen.classList.add('is-booted');
-      if (screenGlow) screenGlow.style.opacity = '1';
-      if (screenParticles) screenParticles.style.opacity = '1';
+      if (glow) {
+        glow.classList.add('is-visible');
+      }
+    }, 100);
+
+    // Scene 2: At 500ms, logo materializes
+    setTimeout(() => {
+      if (logoWrapper) {
+        logoWrapper.classList.add('materialize');
+      }
     }, 500);
 
-    // Transition trigger at ~2.0 seconds
+    // Scene 3: At 1500ms, logo pulses gently once
     setTimeout(() => {
-      if (targetMascot && mascotContainer && overlay) {
-        const targetRect = targetMascot.getBoundingClientRect();
-        const introRect = mascotContainer.getBoundingClientRect();
+      if (logoWrapper) {
+        logoWrapper.classList.add('pulse-glow');
+      }
+    }, 1500);
+
+    // Scene 4: At 2300ms, glide/scale transition to navbar position
+    setTimeout(() => {
+      if (targetLogo && logoWrapper) {
+        // Temporarily reveal the homepage layout to get the correct layout coordinates
+        const isIntroActive = document.body.classList.contains('intro-active');
+        const isRevealActive = document.body.classList.contains('reveal-homepage');
+        
+        document.body.classList.remove('intro-active');
+        document.body.classList.add('reveal-homepage');
+        
+        // Force reflow so getBoundingClientRect() returns the correct layout values
+        const targetRect = targetLogo.getBoundingClientRect();
+        
+        // Restore initial body classes for a clean fade transition
+        if (isIntroActive) {
+          document.body.classList.add('intro-active');
+        }
+        if (!isRevealActive) {
+          document.body.classList.remove('reveal-homepage');
+        }
+
+        // Measure current bounding rect of the wrapper
+        const introRect = logoWrapper.getBoundingClientRect();
+
+        // Calculate center points
+        const introCenterX = introRect.left + introRect.width / 2;
+        const introCenterY = introRect.top + introRect.height / 2;
+
+        const targetCenterX = targetRect.left + targetRect.width / 2;
+        const targetCenterY = targetRect.top + targetRect.height / 2;
 
         // Calculate translation relative to its current screen position
-        const translateX = targetRect.left - introRect.left;
-        const translateY = targetRect.top - introRect.top;
+        const translateX = targetCenterX - introCenterX;
+        const translateY = targetCenterY - introCenterY;
+
+        // Calculate scale relative to unscaled width (offsetWidth)
+        const unscaledWidth = logoWrapper.offsetWidth || 220;
+        let targetWidth = targetRect.width;
+        if (targetWidth === 0) {
+          // Fallback if image aspect ratio isn't loaded yet (height is 62px, aspect ratio is 825/303)
+          targetWidth = 62 * (825 / 303);
+        }
+        const targetScale = targetWidth / unscaledWidth;
 
         // Add visual transition classes
         overlay.classList.add('is-transitioning');
-        mascotContainer.classList.add('glide-active');
+        logoWrapper.classList.add('glide-active');
 
-        // Apply dynamic transform directly to the mascot container (scale up to 1.0)
-        mascotContainer.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(1.0)`;
+        // Apply dynamic transform directly to the logo wrapper
+        logoWrapper.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${targetScale})`;
 
         // Reveal landing page elements
         document.body.classList.remove('intro-active');
         document.body.classList.add('reveal-homepage');
       } else {
-        // Fallback if coordinates cannot be resolved
+        // Fallback if elements cannot be resolved
         document.body.classList.remove('intro-active');
         document.body.classList.add('reveal-homepage');
-        if (overlay) {
-          overlay.style.opacity = '0';
-          overlay.style.visibility = 'hidden';
-        }
+        document.body.classList.add('intro-complete');
+        overlay.style.display = 'none';
       }
 
-      // Cleanup overlay after glide animation completes (1.2s + buffer)
+      // Cleanup overlay after glide animation completes (0.65s + buffer = 700ms)
       setTimeout(() => {
-        if (overlay) {
-          overlay.style.display = 'none';
-        }
-      }, 1300);
+        document.body.classList.add('intro-complete');
+        overlay.style.display = 'none';
+      }, 700);
 
-    }, 3000);
+    }, 2300);
   };
 
   if (document.readyState === 'loading') {

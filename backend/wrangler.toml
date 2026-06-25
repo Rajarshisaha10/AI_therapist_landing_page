@@ -3,6 +3,3 @@ main = "src/index.js"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
-[vars]
-# Direct connection string for Postgres
-DATABASE_URL = "postgresql://theraseek_user:nxvVLsGdjMqS4smHEPnYgUISy0kZsVgR@dpg-d8u18cjeo5us73c09vfg-a.oregon-postgres.render.com/theraseek"

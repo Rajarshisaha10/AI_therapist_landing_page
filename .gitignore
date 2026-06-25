@@ -28,6 +28,7 @@ backend/.wrangler/
 .env.development.local
 .env.test.local
 .env.production.local
+.dev.vars
 
 # Build outputs
 dist/

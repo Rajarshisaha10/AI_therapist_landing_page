@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Theraseek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#F8E9E4;
+  --card:#FFFDFC;
+  --plum:#2A1820;
+  --plum-mid:#6E2C3E;
+  --accent:#A9415A;
+  --mauve:#C76E7F;
+  --muted:#5C4751;
+  --white:#FFFDFC;
+  --lavender:#F3CFC8;
+  --lavender-mid:#C76E7F;
+  --dark:#1A0A1A;
+  --border: rgba(201,168,196,0.22);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family:'DM Sans',sans-serif; background: var(--bg); color: var(--plum); overflow-x: hidden; font-weight:300; line-height:1.8; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3.5rem;
+  background: #F8E9E4;
+  border-bottom: 1px solid rgba(199,110,127,0.15);
+}
+.logo-text { font-family:'Playfair Display',serif; font-size:24px; font-weight:500; text-decoration:none; color:var(--plum); }
+.logo-text .thera { color:#9E5D6B; }
+.logo-text .seek  { color:#4D5D3E; }
+.nav-back { font-size:13px; color:var(--muted); text-decoration:none; font-weight:400; display:flex; align-items:center; gap:6px; transition:color .2s; }
+.nav-back:hover { color:var(--accent); }
+.nav-back::before { content:'←'; font-size:14px; }
+
+/* ── HERO STRIP ── */
+.legal-hero {
+  background: var(--dark);
+  padding: 8rem 3.5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.legal-hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(169,65,90,0.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+.legal-hero-inner { max-width: 860px; margin: 0 auto; position:relative; }
+.legal-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:10px; letter-spacing:0.25em; text-transform:uppercase;
+  color:var(--mauve); font-weight:500; margin-bottom:1.6rem;
+}
+.legal-eyebrow-line { width:20px; height:1px; background:var(--mauve); opacity:.5; }
+.legal-hero h1 {
+  font-family:'Playfair Display',serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight:600; line-height:1.1; color:#fff;
+  letter-spacing:-0.03em; margin-bottom:1.2rem;
+}
+.legal-hero h1 em { font-style:italic; color:var(--mauve); }
+.legal-hero-sub {
+  font-size:15px; line-height:1.85; color:rgba(255,255,255,0.5);
+  max-width:540px; font-weight:300; margin-bottom:2.4rem;
+}
+.legal-meta {
+  display:flex; gap:2rem; flex-wrap:wrap;
+}
+.legal-meta-item {
+  font-size:11.5px; color:rgba(255,255,255,0.3); font-weight:300; letter-spacing:.04em;
+}
+.legal-meta-item strong { color:rgba(255,255,255,0.65); font-weight:500; }
+
+/* ── PAGE LAYOUT ── */
+.legal-page {
+  max-width: 860px; margin: 0 auto;
+  padding: 5rem 3.5rem 8rem;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ── STICKY SIDEBAR ── */
+.sidebar {
+  position: sticky; top: 7rem;
+}
+.sidebar-section {
+  margin-bottom: 2.4rem;
+}
+.sidebar-label {
+  font-size:9.5px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--mauve); font-weight:500; margin-bottom:.8rem;
+}
+.sidebar-nav { list-style:none; }
+.sidebar-nav li { margin-bottom:.35rem; }
+.sidebar-nav a {
+  font-size:12.5px; color:var(--muted); text-decoration:none;
+  font-weight:300; line-height:1.6; transition:color .2s;
+  display:block; padding: 3px 0;
+  border-left: 2px solid transparent; padding-left:10px;
+}
+.sidebar-nav a:hover,
+.sidebar-nav a.active { color:var(--accent); border-left-color:var(--accent); }
+
+.sidebar-contact {
+  background:var(--card); border-radius:16px;
+  padding:1.4rem 1.2rem;
+  border:1px solid var(--border);
+}
+.sidebar-contact h4 {
+  font-family:'Playfair Display',serif;
+  font-size:.9rem; font-weight:500; color:var(--plum);
+  margin-bottom:.5rem;
+}
+.sidebar-contact p {
+  font-size:12px; color:var(--muted); font-weight:300; line-height:1.65; margin-bottom:.6rem;
+}
+.sidebar-contact a {
+  font-size:12px; color:var(--accent); font-weight:500; text-decoration:none;
+}
+
+/* ── MAIN CONTENT ── */
+.legal-content { min-width: 0; }
+
+/* ── LEGAL SECTION ── */
+.legal-section {
+  margin-bottom: 3.2rem;
+  scroll-margin-top: 7rem;
+}
+.legal-section-head {
+  display:flex; align-items:baseline; gap:.8rem;
+  margin-bottom:1.1rem; padding-bottom:.8rem;
+  border-bottom:1px solid var(--border);
+}
+.section-num {
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem; font-weight:400;
+  color:var(--lavender-mid); line-height:1;
+  flex-shrink:0; opacity:.7;
+}
+.legal-section h2 {
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem; font-weight:500;
+  color:var(--plum); line-height:1.3;
+}
+.legal-section p {
+  font-size:14px; color:var(--muted); line-height:1.88;
+  font-weight:300; margin-bottom:.9rem;
+}
+.legal-section p:last-child { margin-bottom:0; }
+.legal-section ul {
+  list-style:none; margin: .6rem 0 .9rem;
+}
+.legal-section ul li {
+  font-size:14px; color:var(--muted); line-height:1.8;
+  font-weight:300; padding-left:1.4rem; position:relative;
+  margin-bottom:.3rem;
+}
+.legal-section ul li::before {
+  content:'–';
+  position:absolute; left:0; color:var(--mauve); opacity:.7;
+}
+
+/* Highlight box */
+.highlight-box {
+  background:var(--lavender); border-radius:14px;
+  padding:1.4rem 1.6rem; margin:1.2rem 0;
+  border-left:3px solid var(--accent);
+}
+.highlight-box p {
+  font-size:13.5px; color:var(--plum-mid); line-height:1.8; margin:0;
+}
+.highlight-box strong { color:var(--plum); }
+
+/* Warning box */
+.warn-box {
+  background:#fff3f3; border-radius:14px;
+  padding:1.4rem 1.6rem; margin:1.2rem 0;
+  border-left:3px solid #c0392b;
+}
+.warn-box p {
+  font-size:13.5px; color:#7a2020; line-height:1.8; margin:0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--plum); padding:2.2rem 3.5rem;
+  display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:1rem;
+}
+.foot-brand { font-family:'Playfair Display',serif; font-size:18px; font-weight:500; }
+.foot-brand .thera { color:#C9A0A8; }
+.foot-brand .seek  { color:#8FA882; }
+.foot-links { display:flex; gap:1.8rem; }
+.foot-links a {
+  text-decoration:none; font-size:12px;
+  color:rgba(201,168,196,0.5); transition:color .25s;
+}
+.foot-links a:hover { color:var(--mauve); }
+.foot-disc { font-size:11px; color:rgba(201,168,196,0.28); font-weight:300; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  nav { padding:1rem 1.5rem; }
+  .legal-hero { padding:7rem 1.5rem 3.5rem; }
+  .legal-page { grid-template-columns:1fr; gap:2.5rem; padding:3rem 1.5rem 6rem; }
+  .sidebar { position:static; }
+  footer { flex-direction:column; align-items:center; text-align:center; padding:2rem 1.5rem; }
+}
+
+@media(prefers-reduced-motion:reduce){ * { animation:none!important; transition:none!important; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo-text" href="index.html"><span class="thera">Thera</span><span class="seek">seek</span></a>
+  <a class="nav-back" href="index.html">Back to home</a>
+</nav>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-eyebrow">
+      <div class="legal-eyebrow-line"></div>Legal Documents
+      <div class="legal-eyebrow-line"></div>
+    </div>
+    <h1>Terms of Service<br>plain and <em>simple.</em></h1>
+    <p class="legal-hero-sub">
+      These Terms of Service form a binding legal agreement between you and TheraSeek Technologies Private Limited governing your access to and use of the Theraseek mobile application and associated web services.
+    </p>
+    <div class="legal-meta">
+      <div class="legal-meta-item"><strong>Effective:</strong> 25 June 2026</div>
+      <div class="legal-meta-item"><strong>Last revised:</strong> 25 June 2026</div>
+      <div class="legal-meta-item"><strong>Version:</strong> 1.0.0</div>
+      <div class="legal-meta-item"><strong>Governed by:</strong> Indian IT Act, 2000 &amp; DPDPA 2023</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="legal-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Terms of Service</div>
+      <ul class="sidebar-nav" id="terms-nav">
+        <li><a href="#tos-about">1. About Theraseek</a></li>
+        <li><a href="#tos-eligibility">2. Eligibility</a></li>
+        <li><a href="#tos-license">3. Licence</a></li>
+        <li><a href="#tos-not-therapy">4. Not a Therapist</a></li>
+        <li><a href="#tos-conduct">5. Acceptable Use</a></li>
+        <li><a href="#tos-payment">6. Subscription &amp; Billing</a></li>
+        <li><a href="#tos-ip">7. Intellectual Property</a></li>
+        <li><a href="#tos-liability">8. Liability Limits</a></li>
+        <li><a href="#tos-termination">9. Termination</a></li>
+        <li><a href="#tos-governing">10. Governing Law</a></li>
+      </ul>
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-label">Privacy Policy</div>
+      <ul class="sidebar-nav" id="privacy-nav">
+        <li><a href="privacy.html">Read Privacy Policy →</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-contact">
+      <h4>Questions?</h4>
+      <p>Reach our legal team directly. We respond within 72 hours.</p>
+      <a href="mailto:privacy@theraseek.ai">privacy@theraseek.ai</a>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="legal-content">
+
+    <div id="panel-terms">
+
+      <div class="legal-section" id="tos-about">
+        <div class="legal-section-head">
+          <span class="section-num">01</span>
+          <h2>About Theraseek &amp; This Agreement</h2>
+        </div>
+        <p>
+          These Terms of Service ("Terms") form a binding legal agreement between you
+          ("User", "you") and <strong>TheraSeek Technologies Private Limited</strong>
+          ("Theraseek", "we", "us") governing your access to and use of the Theraseek
+          mobile application and associated web services ("Service").
+        </p>
+        <p>
+          By downloading the app, creating an account, or joining the waitlist, you confirm
+          that you have read, understood, and agree to these Terms in full. If you do not
+          agree, do not use the Service.
+        </p>
+        <p>
+          These Terms, together with our Privacy Policy and any supplementary notices,
+          form the complete agreement between you and Theraseek. In the event of conflict,
+          these Terms prevail.
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-eligibility">
+        <div class="legal-section-head">
+          <span class="section-num">02</span>
+          <h2>Eligibility</h2>
+        </div>
+        <p>You may use Theraseek if you meet all of the following:</p>
+        <ul>
+          <li>You are 18 years of age or older; or aged 13–17 with documented parental consent</li>
+          <li>You are a natural person (not a bot, corporation, or automated system)</li>
+          <li>You have not previously been banned or removed from the Service by us</li>
+          <li>You are using the Service for your own personal, non-commercial wellbeing only</li>
+          <li>Your use complies with all applicable local, state, national, and international laws</li>
+        </ul>
+        <p>
+          Theraseek reserves the right to verify eligibility and to refuse or terminate
+          access at any time if these conditions are not met. We are not responsible if
+          someone provides false information about their age to access the Service.
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-license">
+        <div class="legal-section-head">
+          <span class="section-num">03</span>
+          <h2>Licence to Use the Service</h2>
+        </div>
+        <p>
+          Subject to these Terms, Theraseek grants you a <strong>personal, non-exclusive,
+          non-transferable, revocable, limited licence</strong> to install and use the
+          Theraseek app on a device you own or control, solely for your personal wellbeing
+          use as permitted by the features of the Service.
+        </p>
+        <p>You may not:</p>
+        <ul>
+          <li>Copy, distribute, sublicense, sell, or resell the app or any part of it</li>
+          <li>Reverse engineer, decompile, or attempt to extract source code</li>
+          <li>Use the Service to build a competing product or service</li>
+          <li>Use automated means to access, scrape, or stress-test the Service</li>
+          <li>Circumvent or interfere with any security or access control feature</li>
+          <li>Share your account credentials with another person</li>
+        </ul>
+        <p>
+          Theraseek retains all rights not expressly granted in these Terms.
+          This licence terminates automatically if you violate these Terms.
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-not-therapy">
+        <div class="legal-section-head">
+          <span class="section-num">04</span>
+          <h2>Theraseek Is Not a Therapist — Read This Carefully</h2>
+        </div>
+
+        <div class="warn-box">
+          <p>
+            <strong>Theraseek is not a licensed medical or mental health service.</strong>
+            It cannot diagnose, treat, monitor, or cure any mental health condition. It is
+            not a substitute for professional therapy, psychiatry, clinical counselling,
+            or emergency intervention. Do not delay seeking professional help because of
+            information or support received from Theraseek.
+          </p>
+        </div>
+
+        <p>
+          Theraseek is an AI-powered emotional support companion. Its purpose is to
+          provide a private, non-judgmental space for reflection and self-expression.
+          It uses techniques informed by evidence-based approaches (such as CBT and
+          mindfulness), but these are self-help tools, not clinical treatment.
+        </p>
+        <p>
+          Theraseek is <strong>not appropriate</strong> for:
+        </p>
+        <ul>
+          <li>Active suicidal ideation or self-harm planning</li>
+          <li>Psychosis, dissociation, or severe psychiatric conditions</li>
+          <li>Clinical eating disorders requiring medical monitoring</li>
+          <li>Domestic abuse crises or situations requiring immediate safety intervention</li>
+          <li>Substance dependency requiring clinical detox</li>
+        </ul>
+        <p>
+          If any of the above apply to you, please contact emergency services (112 in India)
+          or a licensed mental health professional immediately. Theraseek's in-app crisis
+          feature will surface helpline numbers if the app detects distress signals — but
+          do not rely solely on this; call for help directly.
+        </p>
+        <p>
+          You use the Service at your own discretion and assume all responsibility for
+          decisions made based on your sessions.
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-conduct">
+        <div class="legal-section-head">
+          <span class="section-num">05</span>
+          <h2>Acceptable Use</h2>
+        </div>
+        <p>
+          You agree to use Theraseek only for lawful, personal wellbeing purposes. You
+          must not use the Service to:
+        </p>
+        <ul>
+          <li>Attempt to probe, exploit, or manipulate the AI model for any purpose other than personal reflection</li>
+          <li>Deliberately attempt to elicit harmful, illegal, or unethical outputs</li>
+          <li>Share screenshots or recordings of Theraseek sessions in a manner that misrepresents the Service's capabilities</li>
+          <li>Use the Service on behalf of another person without their consent</li>
+          <li>Conduct independent research or clinical studies using the Service without explicit written permission from Theraseek</li>
+          <li>Violate any applicable law or regulation</li>
+        </ul>
+        <p>
+          Theraseek reserves the right to suspend or terminate accounts where misuse is
+          suspected, without prior notice and at its sole discretion.
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-payment">
+        <div class="legal-section-head">
+          <span class="section-num">06</span>
+          <h2>Subscription, Billing &amp; Refunds</h2>
+        </div>
+        <p>
+          Theraseek offers a <strong>3-day free trial</strong> followed by a subscription
+          plan at pricing published on the App Store/Play Store listing at time of
+          signup. All prices are in INR and are inclusive of applicable taxes.
+        </p>
+        <ul>
+          <li>
+            <strong>Billing:</strong> Subscriptions are billed in advance on a monthly or
+            annual cycle via the payment method you provide. Failure to pay may result in
+            suspension of access.
+          </li>
+          <li>
+            <strong>Trial cancellation:</strong> You may cancel during the free trial
+            without charge. Cancellation must be made at least 24 hours before the trial
+            ends to avoid the first billing.
+          </li>
+          <li>
+            <strong>Refunds:</strong> We offer a full refund within 7 days of a first
+            paid subscription charge if the Service is materially non-functional. After
+            7 days, no refunds are issued for partial billing periods. Refund requests:
+            billing@theraseek.ai.
+          </li>
+          <li>
+            <strong>Student discounts:</strong> Available on written verification. Apply at
+            support@theraseek.ai with a valid student ID.
+          </li>
+          <li>
+            <strong>Price changes:</strong> We will give at least 30 days' notice of
+            subscription price changes via email and in-app notice.
+          </li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="tos-ip">
+        <div class="legal-section-head">
+          <span class="section-num">07</span>
+          <h2>Intellectual Property</h2>
+        </div>
+        <p>
+          All elements of the Theraseek application — including the app software, AI model
+          weights, visual design, brand assets, character mascot, and written content —
+          are the exclusive intellectual property of TheraSeek Technologies Private Limited,
+          protected under Indian and international IP law.
+        </p>
+        <p>
+          Your conversation data, mood entries, and personal reflections generated through
+          the Service belong to you. You grant Theraseek no rights to this content.
+          Theraseek does not use your conversation data to train AI models.
+        </p>
+        <p>
+          If you believe any content on the Service infringes your intellectual property
+          rights, notify us at legal@theraseek.ai with the subject line "IP Notice".
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-liability">
+        <div class="legal-section-head">
+          <span class="section-num">08</span>
+          <h2>Disclaimers &amp; Limitation of Liability</h2>
+        </div>
+        <p>
+          The Service is provided on an <strong>"as is" and "as available" basis</strong>
+          without warranties of any kind, express or implied, including but not limited
+          to warranties of merchantability, fitness for a particular purpose, or
+          uninterrupted availability.
+        </p>
+        <p>
+          Theraseek does not warrant that:
+        </p>
+        <ul>
+          <li>The Service will be error-free, uninterrupted, or available at all times</li>
+          <li>The AI companion's responses will be accurate, complete, or suitable for any specific purpose</li>
+          <li>The Service will meet your individual mental health needs</li>
+        </ul>
+        <p>
+          To the maximum extent permitted by applicable Indian law, Theraseek's total
+          liability to you for any claim arising from these Terms or your use of the
+          Service shall not exceed the amount you paid to us in the 3 months immediately
+          preceding the event giving rise to the claim.
+        </p>
+        <p>
+          Theraseek is not liable for any indirect, incidental, consequential, or
+          punitive damages, including loss of data, loss of goodwill, or personal injury
+          resulting from use or inability to use the Service.
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-termination">
+        <div class="legal-section-head">
+          <span class="section-num">09</span>
+          <h2>Termination</h2>
+        </div>
+        <p>
+          <strong>By you:</strong> You may terminate your use of the Service at any time
+          by cancelling your subscription and deleting the app. To request deletion of
+          account-level data we hold, email privacy@theraseek.ai.
+        </p>
+        <p>
+          <strong>By us:</strong> Theraseek may suspend or terminate your access with or
+          without notice if you violate these Terms, if we suspect fraudulent or harmful
+          use, or if we discontinue the Service entirely. If we discontinue the Service,
+          we will provide at least 30 days' notice and pro-rata refunds for unused
+          prepaid subscription time.
+        </p>
+        <p>
+          On termination, your licence to use the Service immediately ends. Sections 4,
+          7, 8, and 10 of these Terms survive termination.
+        </p>
+      </div>
+
+      <div class="legal-section" id="tos-governing">
+        <div class="legal-section-head">
+          <span class="section-num">10</span>
+          <h2>Governing Law &amp; Dispute Resolution</h2>
+        </div>
+        <p>
+          These Terms are governed by the laws of <strong>India</strong>, including the
+          Information Technology Act, 2000, the Digital Personal Data Protection Act, 2023,
+          and the Consumer Protection Act, 2019 where applicable.
+        </p>
+        <p>
+          In the event of a dispute, both parties agree to first attempt resolution through
+          good-faith negotiation. If unresolved within 30 days, disputes shall be referred
+          to arbitration under the Arbitration and Conciliation Act, 1996, with the seat of
+          arbitration in Kolkata, West Bengal, India. The language of arbitration shall be
+          English.
+        </p>
+        <p>
+          Nothing in this clause prevents you from making a complaint to a consumer
+          protection authority or the Data Protection Board of India.
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Version 1.0.0 — Effective 25 June 2026.</strong> These Terms were
+            last reviewed by counsel on [date — insert before launch]. They will be
+            reviewed annually or when there is a material change to the Service.
+          </p>
+        </div>
+      </div>
+
+    </div><!-- /panel-terms -->
+
+  </main>
+</div><!-- /legal-page -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand"><span class="thera">Thera</span><span class="seek">seek</span></div>
+  <div class="foot-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="#">Crisis resources</a>
+    <a href="#">About</a>
+    <a href="mailto:privacy@theraseek.ai">Contact</a>
+  </div>
+  <div class="foot-disc">Not a replacement for professional therapy. © 2026 TheraSeek Technologies Pvt Ltd.</div>
+</footer>
+
+<script>
+// ── SIDEBAR ACTIVE LINK ON SCROLL ──
+const allSections = document.querySelectorAll('.legal-section[id]');
+const allNavLinks = document.querySelectorAll('.sidebar-nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      allNavLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+allSections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

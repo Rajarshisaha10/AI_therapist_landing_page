@@ -1,0 +1,26 @@
+{
+  "name": "theraseek.ai",
+  "version": "1.0.0",
+  "description": "Landing page and early-access waitlist for **TheraSeek** — a gentle, always-available AI companion for mental wellbeing.",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajarshisaha10/AI_therapist_landing_page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rajarshisaha10/AI_therapist_landing_page/issues"
+  },
+  "homepage": "https://github.com/Rajarshisaha10/AI_therapist_landing_page#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "hono": "^4.12.27",
+    "pg": "^8.22.0"
+  }
+}

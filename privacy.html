@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Theraseek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#F8E9E4;
+  --card:#FFFDFC;
+  --plum:#2A1820;
+  --plum-mid:#6E2C3E;
+  --accent:#A9415A;
+  --mauve:#C76E7F;
+  --muted:#5C4751;
+  --white:#FFFDFC;
+  --lavender:#F3CFC8;
+  --lavender-mid:#C76E7F;
+  --dark:#1A0A1A;
+  --border: rgba(201,168,196,0.22);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family:'DM Sans',sans-serif; background: var(--bg); color: var(--plum); overflow-x: hidden; font-weight:300; line-height:1.8; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3.5rem;
+  background: #F8E9E4;
+  border-bottom: 1px solid rgba(199,110,127,0.15);
+}
+.logo-text { font-family:'Playfair Display',serif; font-size:24px; font-weight:500; text-decoration:none; color:var(--plum); }
+.logo-text .thera { color:#9E5D6B; }
+.logo-text .seek  { color:#4D5D3E; }
+.nav-back { font-size:13px; color:var(--muted); text-decoration:none; font-weight:400; display:flex; align-items:center; gap:6px; transition:color .2s; }
+.nav-back:hover { color:var(--accent); }
+.nav-back::before { content:'←'; font-size:14px; }
+
+/* ── HERO STRIP ── */
+.legal-hero {
+  background: var(--dark);
+  padding: 8rem 3.5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.legal-hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(169,65,90,0.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+.legal-hero-inner { max-width: 860px; margin: 0 auto; position:relative; }
+.legal-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:10px; letter-spacing:0.25em; text-transform:uppercase;
+  color:var(--mauve); font-weight:500; margin-bottom:1.6rem;
+}
+.legal-eyebrow-line { width:20px; height:1px; background:var(--mauve); opacity:.5; }
+.legal-hero h1 {
+  font-family:'Playfair Display',serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight:600; line-height:1.1; color:#fff;
+  letter-spacing:-0.03em; margin-bottom:1.2rem;
+}
+.legal-hero h1 em { font-style:italic; color:var(--mauve); }
+.legal-hero-sub {
+  font-size:15px; line-height:1.85; color:rgba(255,255,255,0.5);
+  max-width:540px; font-weight:300; margin-bottom:2.4rem;
+}
+.legal-meta {
+  display:flex; gap:2rem; flex-wrap:wrap;
+}
+.legal-meta-item {
+  font-size:11.5px; color:rgba(255,255,255,0.3); font-weight:300; letter-spacing:.04em;
+}
+.legal-meta-item strong { color:rgba(255,255,255,0.65); font-weight:500; }
+
+/* ── PRIVACY COMMITMENT BANNER ── */
+.privacy-banner {
+  background: var(--plum);
+  padding: 2.8rem 3.5rem;
+}
+.privacy-banner-inner {
+  max-width: 860px; margin: 0 auto;
+  display: flex; align-items: center; gap: 2rem;
+}
+.privacy-badge {
+  flex-shrink:0;
+  width:56px; height:56px; border-radius:50%;
+  border:1.5px solid rgba(199,110,127,0.4);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+}
+.privacy-banner-text h3 {
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem; font-weight:500; color:#fff; margin-bottom:.3rem;
+}
+.privacy-banner-text p {
+  font-size:13.5px; color:rgba(255,255,255,0.48); font-weight:300; line-height:1.7;
+}
+
+/* ── PAGE LAYOUT ── */
+.legal-page {
+  max-width: 860px; margin: 0 auto;
+  padding: 5rem 3.5rem 8rem;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ── STICKY SIDEBAR ── */
+.sidebar {
+  position: sticky; top: 7rem;
+}
+.sidebar-section {
+  margin-bottom: 2.4rem;
+}
+.sidebar-label {
+  font-size:9.5px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--mauve); font-weight:500; margin-bottom:.8rem;
+}
+.sidebar-nav { list-style:none; }
+.sidebar-nav li { margin-bottom:.35rem; }
+.sidebar-nav a {
+  font-size:12.5px; color:var(--muted); text-decoration:none;
+  font-weight:300; line-height:1.6; transition:color .2s;
+  display:block; padding: 3px 0;
+  border-left: 2px solid transparent; padding-left:10px;
+}
+.sidebar-nav a:hover,
+.sidebar-nav a.active { color:var(--accent); border-left-color:var(--accent); }
+
+.sidebar-contact {
+  background:var(--card); border-radius:16px;
+  padding:1.4rem 1.2rem;
+  border:1px solid var(--border);
+}
+.sidebar-contact h4 {
+  font-family:'Playfair Display',serif;
+  font-size:.9rem; font-weight:500; color:var(--plum);
+  margin-bottom:.5rem;
+}
+.sidebar-contact p {
+  font-size:12px; color:var(--muted); font-weight:300; line-height:1.65; margin-bottom:.6rem;
+}
+.sidebar-contact a {
+  font-size:12px; color:var(--accent); font-weight:500; text-decoration:none;
+}
+
+/* ── MAIN CONTENT ── */
+.legal-content { min-width: 0; }
+
+/* ── LEGAL SECTION ── */
+.legal-section {
+  margin-bottom: 3.2rem;
+  scroll-margin-top: 7rem;
+}
+.legal-section-head {
+  display:flex; align-items:baseline; gap:.8rem;
+  margin-bottom:1.1rem; padding-bottom:.8rem;
+  border-bottom:1px solid var(--border);
+}
+.section-num {
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem; font-weight:400;
+  color:var(--lavender-mid); line-height:1;
+  flex-shrink:0; opacity:.7;
+}
+.legal-section h2 {
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem; font-weight:500;
+  color:var(--plum); line-height:1.3;
+}
+.legal-section p {
+  font-size:14px; color:var(--muted); line-height:1.88;
+  font-weight:300; margin-bottom:.9rem;
+}
+.legal-section p:last-child { margin-bottom:0; }
+.legal-section ul {
+  list-style:none; margin: .6rem 0 .9rem;
+}
+.legal-section ul li {
+  font-size:14px; color:var(--muted); line-height:1.8;
+  font-weight:300; padding-left:1.4rem; position:relative;
+  margin-bottom:.3rem;
+}
+.legal-section ul li::before {
+  content:'–';
+  position:absolute; left:0; color:var(--mauve); opacity:.7;
+}
+
+/* Highlight box */
+.highlight-box {
+  background:var(--lavender); border-radius:14px;
+  padding:1.4rem 1.6rem; margin:1.2rem 0;
+  border-left:3px solid var(--accent);
+}
+.highlight-box p {
+  font-size:13.5px; color:var(--plum-mid); line-height:1.8; margin:0;
+}
+.highlight-box strong { color:var(--plum); }
+
+/* Warning box */
+.warn-box {
+  background:#fff3f3; border-radius:14px;
+  padding:1.4rem 1.6rem; margin:1.2rem 0;
+  border-left:3px solid #c0392b;
+}
+.warn-box p {
+  font-size:13.5px; color:#7a2020; line-height:1.8; margin:0;
+}
+
+/* Pill tags */
+.tag-row { display:flex; flex-wrap:wrap; gap:.5rem; margin:.8rem 0; }
+.tag {
+  font-size:11px; font-weight:500; letter-spacing:.04em;
+  padding:.28rem .8rem; border-radius:100px;
+  background:var(--lavender); color:var(--plum-mid);
+}
+.tag.green { background:#e8f5e9; color:#2e7d32; }
+.tag.red   { background:#fdecea; color:#c62828; }
+
+/* Privacy pillars grid (inside content) */
+.pillars-mini {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:.8rem; margin:1.2rem 0;
+}
+.pillar-mini-card {
+  background:var(--card); border-radius:14px;
+  padding:1.2rem 1.3rem;
+  border:1px solid var(--border);
+}
+.pillar-mini-card h4 {
+  font-family:'Playfair Display',serif;
+  font-size:.88rem; font-weight:500; color:var(--plum);
+  margin-bottom:.4rem;
+}
+.pillar-mini-card p {
+  font-size:12.5px; color:var(--muted); line-height:1.7;
+  font-weight:300; margin:0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--plum); padding:2.2rem 3.5rem;
+  display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:1rem;
+}
+.foot-brand { font-family:'Playfair Display',serif; font-size:18px; font-weight:500; }
+.foot-brand .thera { color:#C9A0A8; }
+.foot-brand .seek  { color:#8FA882; }
+.foot-links { display:flex; gap:1.8rem; }
+.foot-links a {
+  text-decoration:none; font-size:12px;
+  color:rgba(201,168,196,0.5); transition:color .25s;
+}
+.foot-links a:hover { color:var(--mauve); }
+.foot-disc { font-size:11px; color:rgba(201,168,196,0.28); font-weight:300; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  nav { padding:1rem 1.5rem; }
+  .legal-hero { padding:7rem 1.5rem 3.5rem; }
+  .privacy-banner { padding:2rem 1.5rem; }
+  .privacy-banner-inner { flex-direction:column; gap:1rem; }
+  .legal-page { grid-template-columns:1fr; gap:2.5rem; padding:3rem 1.5rem 6rem; }
+  .sidebar { position:static; }
+  .pillars-mini { grid-template-columns:1fr; }
+  footer { flex-direction:column; align-items:center; text-align:center; padding:2rem 1.5rem; }
+}
+
+@media(prefers-reduced-motion:reduce){ * { animation:none!important; transition:none!important; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo-text" href="index.html"><span class="thera">Thera</span><span class="seek">seek</span></a>
+  <a class="nav-back" href="index.html">Back to home</a>
+</nav>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-eyebrow">
+      <div class="legal-eyebrow-line"></div>Legal Documents
+      <div class="legal-eyebrow-line"></div>
+    </div>
+    <h1>Privacy Policy<br>written like we <em>mean it.</em></h1>
+    <p class="legal-hero-sub">
+      Most apps bury their data practices in legalese hoping you won't read it.
+      We wrote ours to be understood — because privacy isn't our compliance strategy,
+      it's the entire point of how Theraseek is built.
+    </p>
+    <div class="legal-meta">
+      <div class="legal-meta-item"><strong>Effective:</strong> 25 June 2026</div>
+      <div class="legal-meta-item"><strong>Last revised:</strong> 25 June 2026</div>
+      <div class="legal-meta-item"><strong>Version:</strong> 1.0.0</div>
+      <div class="legal-meta-item"><strong>Governed by:</strong> Indian IT Act, 2000 &amp; DPDPA 2023</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY COMMITMENT BANNER -->
+<div class="privacy-banner">
+  <div class="privacy-banner-inner">
+    <div class="privacy-badge">🔒</div>
+    <div class="privacy-banner-text">
+      <h3>Our core privacy commitment — in one sentence</h3>
+      <p>
+        We built Theraseek so that what you say during a session is processed on your own device,
+        never transmitted to our servers, and cannot be read by us even if a court asked — because
+        we technically do not have it.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="legal-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Privacy Policy</div>
+      <ul class="sidebar-nav" id="privacy-nav">
+        <li><a href="#pp-who">1. Who We Are</a></li>
+        <li><a href="#pp-collect">2. What We Collect</a></li>
+        <li><a href="#pp-how-use">3. How We Use It</a></li>
+        <li><a href="#pp-on-device">4. On-Device Architecture</a></li>
+        <li><a href="#pp-share">5. Who We Share With</a></li>
+        <li><a href="#pp-retention">6. Data Retention</a></li>
+        <li><a href="#pp-rights">7. Your Rights</a></li>
+        <li><a href="#pp-minors">8. Children &amp; Minors</a></li>
+        <li><a href="#pp-crisis">9. Crisis &amp; Safety</a></li>
+        <li><a href="#pp-changes">10. Policy Changes</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Terms of Service</div>
+      <ul class="sidebar-nav" id="terms-nav">
+        <li><a href="terms.html">Read Terms of Service →</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-contact">
+      <h4>Questions?</h4>
+      <p>Reach our privacy officer directly. We respond within 72 hours.</p>
+      <a href="mailto:privacy@theraseek.ai">privacy@theraseek.ai</a>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="legal-content">
+
+    <div id="panel-privacy">
+
+      <div class="legal-section" id="pp-who">
+        <div class="legal-section-head">
+          <span class="section-num">01</span>
+          <h2>Who We Are &amp; How to Reach Us</h2>
+        </div>
+        <p>
+          Theraseek is operated by <strong>TheraSeek Technologies Private Limited</strong>, a company
+          incorporated under the Companies Act, 2013, with registered office in India.
+          Theraseek is an AI-powered emotional wellbeing companion designed to provide a private,
+          accessible, and always-available space for reflection — not a replacement for licensed
+          clinical care.
+        </p>
+        <p>
+          For all privacy-related queries, data requests, or complaints, contact our
+          designated Grievance Officer:
+        </p>
+        <ul>
+          <li><strong>Email:</strong> privacy@theraseek.ai</li>
+          <li><strong>Response time:</strong> Within 72 hours for acknowledgment; 30 days for resolution</li>
+          <li><strong>Postal address:</strong> [Registered office address — to be inserted before launch]</li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="pp-collect">
+        <div class="legal-section-head">
+          <span class="section-num">02</span>
+          <h2>What Information We Collect and Why</h2>
+        </div>
+        <p>
+          We collect as little as technically possible. Every data point below has a direct,
+          stated purpose — we do not collect data "just in case." Here is everything we have
+          access to, split by where it lives:
+        </p>
+
+        <div class="pillars-mini">
+          <div class="pillar-mini-card">
+            <h4>🏠 Stays on your device only</h4>
+            <p>Your spoken audio, conversation transcripts, mood entries, AI-generated
+            insights, and Theraseek's memory of you. We cannot access any of this.</p>
+          </div>
+          <div class="pillar-mini-card">
+            <h4>☁️ Reaches our servers</h4>
+            <p>Waitlist email (if you signed up), subscription status, anonymous crash
+            diagnostics (if opted in), and anonymised aggregate usage patterns with no
+            personally identifying content.</p>
+          </div>
+        </div>
+
+        <p>
+          <strong>Waitlist &amp; account data.</strong> When you join our waitlist, you provide
+          an email address. This is used only to notify you when Theraseek launches or when
+          your early access slot is ready. It is never sold, never used for profiling, and
+          never shared with advertising partners.
+        </p>
+        <p>
+          <strong>Conversation content.</strong> Every word you speak or type to Theraseek is
+          processed entirely on your device using a locally-run model. No audio, no text,
+          and no AI response leaves your phone. We do not have access to the content of
+          your sessions — not now, not ever.
+        </p>
+        <p>
+          <strong>Anonymised usage diagnostics.</strong> If you opt into crash reporting, we
+          receive anonymous technical data (crash stack traces, device OS version,
+          app version). This data contains no conversation content and cannot identify you.
+          Opting out has no impact on the service.
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Plain English summary:</strong> We know your email if you gave it to us.
+            We do not know what you've told Theraseek. That's the point.
+          </p>
+        </div>
+      </div>
+
+      <div class="legal-section" id="pp-how-use">
+        <div class="legal-section-head">
+          <span class="section-num">03</span>
+          <h2>How We Use What We Collect</h2>
+        </div>
+        <p>We use data only for these specific purposes, under the lawful bases noted:</p>
+        <ul>
+          <li>
+            <strong>Waitlist email</strong> — to send you launch notifications and access credentials.
+            Lawful basis: consent (you submitted the form). You can unsubscribe at any time.
+          </li>
+          <li>
+            <strong>Subscription information</strong> — to verify your plan entitlements and
+            process payments via our payment partner. Lawful basis: contract performance.
+          </li>
+          <li>
+            <strong>Anonymous crash diagnostics</strong> — to fix bugs and improve app stability.
+            Lawful basis: legitimate interest (improving safety and reliability). Opt-out available
+            in Settings.
+          </li>
+          <li>
+            <strong>Aggregate anonymised patterns</strong> — to understand general usage
+            (e.g., what features are used most). No conversation content. No individual
+            identification possible. Lawful basis: legitimate interest.
+          </li>
+        </ul>
+        <p>
+          We do not use any data for advertising, behavioural profiling, or sale to third parties —
+          ever. We do not use your conversation data to train AI models, ours or anyone else's.
+        </p>
+      </div>
+
+      <div class="legal-section" id="pp-on-device">
+        <div class="legal-section-head">
+          <span class="section-num">04</span>
+          <h2>Our On-Device Architecture — Why It Matters</h2>
+        </div>
+        <p>
+          Most mental health apps process your conversations on remote servers. That means
+          a copy of what you said lives somewhere outside your phone — on a cloud provider,
+          accessible to engineers, potentially discoverable by legal process. Theraseek
+          is designed differently, by technical choice, not just policy.
+        </p>
+        <ul>
+          <li>
+            <strong>Speech recognition (STT)</strong> runs on-device. Your voice never travels
+            over the internet.
+          </li>
+          <li>
+            <strong>AI responses</strong> are generated by a locally-hosted, fine-tuned model
+            running on your device. There are no calls to OpenAI, Google, Anthropic, or any
+            third-party LLM API during a session.
+          </li>
+          <li>
+            <strong>Text-to-speech (TTS)</strong> runs on-device. Theraseek's voice is
+            synthesised locally.
+          </li>
+          <li>
+            <strong>Memory &amp; conversation history</strong> are stored in an AES-256
+            encrypted local database on your device. Only your device's secure enclave
+            holds the decryption key.
+          </li>
+          <li>
+            <strong>Optional backup</strong> — if you choose to back up conversations
+            (e.g., for device migration), backups are zero-knowledge encrypted before
+            leaving your device. We hold the encrypted blob; we do not hold the key.
+          </li>
+        </ul>
+
+        <div class="highlight-box">
+          <p>
+            <strong>What this means in practice:</strong> If Theraseek receives a legal order
+            to produce your conversation data, we cannot comply — not because we are defying
+            the law, but because the data does not exist on our systems. This is an architectural
+            guarantee, not a policy promise.
+          </p>
+        </div>
+      </div>
+
+      <div class="legal-section" id="pp-share">
+        <div class="legal-section-head">
+          <span class="section-num">05</span>
+          <h2>Who We Share Data With</h2>
+        </div>
+        <p>
+          We share data only with the following categories of third parties, and only
+          the minimum necessary data for each:
+        </p>
+        <ul>
+          <li>
+            <strong>Payment processors</strong> (e.g., Razorpay) — your payment details
+            and subscription status. Governed by their own PCI-DSS compliant privacy terms.
+            We never see your full card number.
+          </li>
+          <li>
+            <strong>Transactional email providers</strong> — your email address, to
+            deliver launch notifications and receipts only.
+          </li>
+          <li>
+            <strong>Crash reporting tool</strong> — anonymous technical data only,
+            if you opted in. No conversation content. No PII.
+          </li>
+          <li>
+            <strong>Legal obligations</strong> — we may disclose account-level data
+            (not conversation data, which we don't have) if required by Indian law,
+            court order, or to prevent imminent harm.
+          </li>
+        </ul>
+        <p>
+          We do not sell data. We do not share data with advertisers. We do not
+          participate in data broker networks. We do not share data with your employer,
+          insurer, or any institution unless you are using an institutional version
+          and have separately consented to that arrangement.
+        </p>
+
+        <div class="tag-row">
+          <span class="tag red">❌ We never sell your data</span>
+          <span class="tag red">❌ No advertising partners</span>
+          <span class="tag green">✓ No third-party AI APIs during sessions</span>
+          <span class="tag green">✓ Conversation data never leaves device</span>
+        </div>
+      </div>
+
+      <div class="legal-section" id="pp-retention">
+        <div class="legal-section-head">
+          <span class="section-num">06</span>
+          <h2>How Long We Keep Data</h2>
+        </div>
+        <ul>
+          <li>
+            <strong>Waitlist email:</strong> Until you unsubscribe or 24 months after
+            the waitlist closes, whichever is sooner.
+          </li>
+          <li>
+            <strong>Account data:</strong> For the duration of your subscription plus
+            90 days after account deletion (to resolve billing disputes), then
+            permanently deleted.
+          </li>
+          <li>
+            <strong>Conversation data:</strong> Stored on your device only.
+            Duration is controlled entirely by you. Delete the app, delete the data.
+          </li>
+          <li>
+            <strong>Anonymous diagnostics:</strong> Retained for 12 months in
+            aggregated, non-identifiable form.
+          </li>
+          <li>
+            <strong>Payment records:</strong> Retained for 8 years as required
+            by the Income Tax Act, 1961. Stored by our payment processor, not us.
+          </li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="pp-rights">
+        <div class="legal-section-head">
+          <span class="section-num">07</span>
+          <h2>Your Rights Under DPDPA 2023 &amp; GDPR</h2>
+        </div>
+        <p>
+          Depending on your jurisdiction, you may have the following rights regarding
+          the data we hold on our servers (account and subscription data — not on-device
+          conversation data, which only you control):
+        </p>
+        <ul>
+          <li><strong>Right to access</strong> — request a copy of the data we hold about you</li>
+          <li><strong>Right to correction</strong> — ask us to correct inaccurate data</li>
+          <li><strong>Right to erasure</strong> — ask us to delete your account and associated data</li>
+          <li><strong>Right to portability</strong> — receive your account data in a structured format</li>
+          <li><strong>Right to withdraw consent</strong> — for waitlist communications and optional diagnostics</li>
+          <li><strong>Right to nominate</strong> — under DPDPA 2023, you may nominate another person to exercise your rights in the event of your death or incapacity</li>
+        </ul>
+        <p>
+          To exercise any of these rights, email <strong>privacy@theraseek.ai</strong>.
+          We will acknowledge your request within 72 hours and fulfil it within 30 days.
+          We may ask you to verify your identity before actioning a request. We will not
+          charge a fee for reasonable requests.
+        </p>
+        <p>
+          If you believe we have handled your data unlawfully, you have the right to
+          lodge a complaint with the Data Protection Board of India (once operational)
+          or the relevant supervisory authority in your jurisdiction.
+        </p>
+      </div>
+
+      <div class="legal-section" id="pp-minors">
+        <div class="legal-section-head">
+          <span class="section-num">08</span>
+          <h2>Children &amp; Minors</h2>
+        </div>
+        <p>
+          Theraseek is intended for users aged <strong>18 and above</strong>.
+          Users aged 13–17 may only use Theraseek with verifiable parental or guardian consent
+          obtained in writing to <strong>privacy@theraseek.ai</strong>. In that case, the
+          Terms of Service constitute a contract between Theraseek and the parent or guardian.
+        </p>
+        <p>
+          Children under 13 years of age are strictly prohibited from creating an account
+          or using the Service. If we discover that a child under 13 has provided personal
+          data without parental consent, we will delete it immediately.
+        </p>
+
+        <div class="warn-box">
+          <p>
+            <strong>If you are under 13:</strong> Do not use this app or provide any personal
+            information. Ask a parent or trusted adult to help you find age-appropriate
+            mental wellness resources.
+          </p>
+        </div>
+      </div>
+
+      <div class="legal-section" id="pp-crisis">
+        <div class="legal-section-head">
+          <span class="section-num">09</span>
+          <h2>Crisis Detection &amp; Safety Referrals</h2>
+        </div>
+        <p>
+          Theraseek includes a crisis detection layer that operates locally on your device.
+          If language patterns suggest you may be at risk of harm to yourself or others,
+          Theraseek will surface emergency helpline information immediately.
+        </p>
+        <p>
+          This crisis detection is hardcoded and cannot be disabled by any conversation flow.
+          The helpline information presented is static, verified, and does not pass through
+          an AI generation step — it always shows the correct emergency contacts for your region.
+        </p>
+        <p>
+          <strong>India crisis resources:</strong>
+        </p>
+        <ul>
+          <li>iCall (TISS): <strong>9152987821</strong></li>
+          <li>Vandrevala Foundation: <strong>1860-2662-345</strong> (24/7)</li>
+          <li>AASRA: <strong>9820466627</strong></li>
+          <li>National Emergency: <strong>112</strong></li>
+        </ul>
+        <p>
+          In extreme circumstances where we have credible reason to believe there is an
+          imminent risk of serious harm, applicable law may require us to act even with
+          limited data. Our ability to do so is constrained by the fact that we do not have
+          access to conversation content. We cannot surveil your sessions. We urge you to
+          call emergency services directly if you or someone you know is in immediate danger.
+        </p>
+      </div>
+
+      <div class="legal-section" id="pp-changes">
+        <div class="legal-section-head">
+          <span class="section-num">10</span>
+          <h2>Changes to This Policy</h2>
+        </div>
+        <p>
+          We will notify you of material changes to this policy by email (if you have an
+          account) and by an in-app notice at least 14 days before the changes take effect.
+          Continued use of Theraseek after the effective date constitutes acceptance of the
+          revised policy. If you do not accept a material change, you may close your account
+          and request deletion of your data before the effective date.
+        </p>
+        <p>
+          A full version history of this policy will be maintained and publicly accessible
+          at theraseek.ai/legal/changelog.
+        </p>
+      </div>
+
+    </div><!-- /panel-privacy -->
+  </main>
+</div><!-- /legal-page -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand"><span class="thera">Thera</span><span class="seek">seek</span></div>
+  <div class="foot-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="#">Crisis resources</a>
+    <a href="#">About</a>
+    <a href="mailto:privacy@theraseek.ai">Contact</a>
+  </div>
+  <div class="foot-disc">Not a replacement for professional therapy. © 2026 TheraSeek Technologies Pvt Ltd.</div>
+</footer>
+
+<script>
+// ── SIDEBAR ACTIVE LINK ON SCROLL ──
+const allSections = document.querySelectorAll('.legal-section[id]');
+const allNavLinks = document.querySelectorAll('.sidebar-nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      allNavLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+allSections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

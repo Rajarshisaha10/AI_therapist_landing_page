@@ -1,3 +1,70 @@
+// ── INTRO TRANSITION SCHEDULER ──
+(function () {
+  const initIntro = () => {
+    const overlay = document.getElementById('intro-overlay');
+    const phoneScreen = document.querySelector('.phone-screen');
+    const screenGlow = document.querySelector('.screen-glow');
+    const screenParticles = document.querySelector('.screen-particles');
+    const targetMascot = document.querySelector('.mascot-img');
+    const mascotContainer = document.querySelector('.boot-mascot-container');
+    const mascotImg = document.querySelector('.boot-mascot');
+
+    if (!overlay) return;
+
+    // Boot screen background fades from black to light cream
+    setTimeout(() => {
+      if (phoneScreen) phoneScreen.classList.add('is-booted');
+      if (screenGlow) screenGlow.style.opacity = '1';
+      if (screenParticles) screenParticles.style.opacity = '1';
+    }, 1000);
+
+    // Transition trigger at ~3.0 seconds
+    setTimeout(() => {
+      if (targetMascot && mascotContainer && overlay) {
+        const targetRect = targetMascot.getBoundingClientRect();
+        const introRect = mascotContainer.getBoundingClientRect();
+
+        // Calculate translation relative to its current screen position
+        const translateX = targetRect.left - introRect.left;
+        const translateY = targetRect.top - introRect.top;
+
+        // Add visual transition classes
+        overlay.classList.add('is-transitioning');
+        mascotContainer.classList.add('glide-active');
+
+        // Apply dynamic transform directly to the mascot container (scale up to 1.0)
+        mascotContainer.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(1.0)`;
+
+        // Reveal landing page elements
+        document.body.classList.remove('intro-active');
+        document.body.classList.add('reveal-homepage');
+      } else {
+        // Fallback if coordinates cannot be resolved
+        document.body.classList.remove('intro-active');
+        document.body.classList.add('reveal-homepage');
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.style.visibility = 'hidden';
+        }
+      }
+
+      // Cleanup overlay after glide animation completes (1.2s + buffer)
+      setTimeout(() => {
+        if (overlay) {
+          overlay.style.display = 'none';
+        }
+      }, 1300);
+
+    }, 3000);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIntro);
+  } else {
+    initIntro();
+  }
+})();
+
 // placeholder art until real assets are dropped in
 document.querySelectorAll('img').forEach(img => {
   img.addEventListener('error', () => {

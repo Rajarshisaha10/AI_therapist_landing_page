@@ -214,10 +214,526 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
   .privacy-pillars{grid-template-columns:1fr;}
 }
 @media(prefers-reduced-motion:reduce){.mascot-img,.mascot-halo,.cta-mascot{animation:none!important;}}
+/* ── PREMIUM ANIMATED INTRO HOOK ── */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
+}
+
+/* breathing background gradient */
+.intro-bg-container {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(60% 50% at 50% 0%,rgba(243,207,200,.6),transparent 70%), var(--bg);
+  animation: bgBreathe 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: center center;
+}
+
+@keyframes bgBreathe {
+  0% { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}
+
+/* subtle dotted grid */
+.intro-bg-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(110,44,62,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+/* subtle animated grain overlay */
+.intro-bg-container::after {
+  content: '';
+  position: absolute;
+  inset: -200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.024;
+  pointer-events: none;
+  animation: grainMove 8s steps(10) infinite;
+}
+@keyframes grainMove {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* gentle pink radial glow */
+.intro-glow {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(243, 207, 200, 0.9) 0%, rgba(199, 110, 127, 0.35) 45%, transparent 72%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: -1;
+  animation: introGlowPulse 5s ease-in-out infinite;
+}
+
+@keyframes introGlowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.07); opacity: 1; }
+}
+
+/* Phone Wrapper & Shadow */
+.intro-phone-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  perspective: 1000px;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* Bezel / Phone Mockup (sleek modern iPhone) */
+.intro-phone {
+  width: 280px;
+  height: 570px;
+  background: #000000; /* dark outer border */
+  border-radius: 44px;
+  padding: 8px; /* thin modern bezel */
+  box-shadow: 
+    0 15px 45px rgba(110, 44, 62, 0.08),
+    0 0 0 1.5px #f4ded7, /* rose-gold inner rim */
+    0 0 0 3px #c76e7f; /* pink accent outer rim */
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  animation: phoneReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards, phoneFloat 3.5s ease-in-out infinite 1.2s;
+  will-change: transform, opacity;
+}
+
+@keyframes phoneReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) rotateY(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+@keyframes phoneFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.phone-shadow {
+  position: absolute;
+  bottom: -35px;
+  width: 220px;
+  height: 18px;
+  background: rgba(42, 24, 32, 0.12);
+  filter: blur(10px);
+  border-radius: 50%;
+  z-index: -1;
+  animation: shadowScale 3.5s ease-in-out infinite 1.2s;
+  transition: opacity 0.8s ease;
+}
+
+@keyframes shadowScale {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(0.94); opacity: 0.4; }
+}
+
+/* Phone Screen & Notch */
+.phone-bezel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #14080e;
+  border-radius: 36px;
+  overflow: hidden;
+}
+
+.dynamic-island {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65px;
+  height: 18px;
+  background: #000000;
+  border-radius: 9px;
+  z-index: 25;
+  transition: opacity 0.5s ease;
+}
+
+.phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* starts black */
+  transition: background 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.phone-screen.is-booted {
+  background: var(--bg) !important;
+}
+
+/* Screen glow & particles */
+.screen-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(243, 207, 200, 0.22), rgba(199, 110, 127, 0.08) 50%, transparent 80%);
+  opacity: 0;
+  transition: opacity 1.5s ease 1s;
+  z-index: 1;
+}
+
+.screen-particles {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease 1s;
+  z-index: 2;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #FFFDFC;
+  border-radius: 50%;
+  filter: blur(0.5px);
+  animation: sparkleAnim 3s ease-in-out infinite;
+}
+
+.sp-1 { top: 25%; left: 20%; animation-delay: 0.2s; }
+.sp-2 { top: 70%; left: 75%; animation-delay: 0.8s; }
+.sp-3 { top: 80%; left: 35%; animation-delay: 1.4s; }
+
+@keyframes sparkleAnim {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.7); }
+  50% { opacity: 0.5; transform: translateY(-10px) scale(1.1); }
+}
+
+/* Boot Sequence */
+.boot-sequence {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.boot-light {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a9415a;
+  filter: blur(2px) drop-shadow(0 0 10px rgba(169,65,90,0.8));
+  opacity: 0;
+  transform: scale(0.5);
+  animation: bootDot 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+}
+
+@keyframes bootDot {
+  0% { opacity: 0; transform: scale(0.5); filter: blur(2px); }
+  50% { opacity: 1; transform: scale(2.0); filter: blur(1px); }
+  100% { opacity: 0; transform: scale(4.5); filter: blur(6px); }
+}
+
+.boot-logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: bootLogoFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
+  z-index: 10;
+}
+
+@keyframes bootLogoFadeIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1) translateY(0);
+  }
+}
+
+.boot-logo-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+.boot-mascot-holder {
+  width: 64px;
+  height: 58px;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: -4px;
+  margin-bottom: -11px;
+}
+
+.boot-mascot-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 320px;
+  height: auto;
+  transform: scale(0.2);
+  transform-origin: top left;
+  z-index: 2;
+  will-change: transform;
+}
+
+.boot-mascot-container.glide-active {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  z-index: 10000;
+}
+
+@keyframes mascotBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.boot-mascot {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(110,44,62,0.15));
+}
+
+.boot-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.boot-logo-text .thera { color: #9E5D6B; }
+.boot-logo-text .seek { color: #4D5D3E; }
+
+.boot-tagline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.boot-tagline-line {
+  width: 18px;
+  height: 1px;
+  background: #5C4751;
+  opacity: 0.4;
+}
+
+.boot-tagline-diamond {
+  font-size: 6px;
+  color: #9E5D6B;
+  line-height: 1;
+}
+
+.boot-tagline-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #5C4751;
+}
+
+/* ── HOMEPAGE INITIAL STATES (when body has .intro-active) ── */
+body.intro-active nav {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+body.intro-active .hero-left .hero-label {
+  opacity: 0;
+  transform: translateY(20px);
+}
+body.intro-active .hero-left h1 {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(10px);
+}
+body.intro-active .hero-left .hero-sub {
+  opacity: 0;
+  transform: translateY(20px);
+}
+body.intro-active .hero-left .email-row,
+body.intro-active .hero-left .hero-proof {
+  opacity: 0;
+  transform: translateY(20px);
+}
+body.intro-active .scroll-hint {
+  opacity: 0;
+}
+body.intro-active #waves {
+  opacity: 0;
+}
+body.intro-active .mascot-stage {
+  opacity: 0;
+}
+
+/* ── REVEAL STATE (added by JS at transition point) ── */
+body.reveal-homepage nav {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+body.reveal-homepage .hero-left .hero-label {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+body.reveal-homepage .hero-left h1 {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0s, filter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0s;
+}
+body.reveal-homepage .hero-left .hero-sub {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+body.reveal-homepage .hero-left .email-row,
+body.reveal-homepage .hero-left .hero-proof {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+body.reveal-homepage .scroll-hint {
+  opacity: 0.4;
+  transition: opacity 1.5s ease 1s;
+}
+body.reveal-homepage #waves {
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+body.reveal-homepage .mascot-stage {
+  opacity: 1;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── IS TRANSITIONING BEZEL/SCREEN STATE ── */
+#intro-overlay.is-transitioning {
+  pointer-events: none;
+}
+.is-transitioning .intro-phone {
+  background: transparent;
+  box-shadow: 
+    0 15px 45px rgba(110, 44, 62, 0),
+    0 0 0 1.5px rgba(244, 222, 215, 0),
+    0 0 0 3px rgba(199, 110, 127, 0);
+  transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.is-transitioning .dynamic-island {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.is-transitioning .phone-bezel {
+  background: transparent;
+  overflow: visible;
+  transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.is-transitioning .phone-screen {
+  background: transparent;
+  overflow: visible;
+  transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.is-transitioning .phone-shadow {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.is-transitioning .boot-logo-wrapper {
+  animation: none !important;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.is-transitioning .intro-bg-container {
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
 </style>
 </head>
-<body>
+<body class="intro-active">
 <canvas id="waves" aria-hidden="true"></canvas>
+
+<!-- INTRO OVERLAY -->
+<div id="intro-overlay">
+  <div class="intro-bg-container">
+    <div class="intro-glow"></div>
+  </div>
+  <div class="intro-phone-wrapper">
+    <div class="intro-phone">
+      <div class="phone-bezel">
+        <div class="dynamic-island"></div>
+        <div class="phone-screen">
+          <div class="screen-glow"></div>
+          <div class="screen-particles">
+            <span class="sparkle sp-1"></span>
+            <span class="sparkle sp-2"></span>
+            <span class="sparkle sp-3"></span>
+          </div>
+          <div class="boot-sequence">
+            <div class="boot-light"></div>
+            <div class="boot-logo-wrapper">
+              <div class="boot-logo-row">
+                <div class="boot-mascot-holder">
+                  <div class="boot-mascot-container">
+                    <img class="boot-mascot" src="assets/mascot.png" alt="Mascot" />
+                  </div>
+                </div>
+                <div class="boot-logo-text">
+                  <span class="thera">thera</span><span class="seek">seek</span>
+                </div>
+              </div>
+              <div class="boot-tagline">
+                <span class="boot-tagline-line"></span>
+                <span class="boot-tagline-diamond">&#9670;</span>
+                <span class="boot-tagline-text">AI HEALTH COMPANION</span>
+                <span class="boot-tagline-line"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-shadow"></div>
+  </div>
+</div>
+
 
 <!-- NAV -->
 <nav>
@@ -238,10 +754,11 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
     <h1>Someone to talk to,<br><em>whenever</em> it gets<br>heavy.</h1>
     <p class="hero-sub" style="margin-bottom:1.2rem; color: var(--plum-mid); font-weight: 500;">Because typing how you feel at 2am is harder than it sounds, just talk naturally.</p>
     <p class="hero-sub">Always awake. Never judging. Your gentle AI companion — here for the hard days, the 3am spirals, and everything in between.</p>
-    <div class="email-row">
-      <input type="email" placeholder="you@email.com" aria-label="Email address"/>
-      <button class="btn-notify">Login &rarr;</button>
-    </div>
+    <form class="email-row" id="join">
+      <input type="email" placeholder="you@email.com" aria-label="Email address" id="email" required/>
+      <button class="btn-notify" type="submit">Login &rarr;</button>
+    </form>
+    <div class="hero-proof" id="hint"><strong><span id="count">2,418</span></strong> people on the list &middot; founding access is free</div>
 
   </div>
   <div class="hero-right">
@@ -420,6 +937,7 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
   <div class="foot-disc">Not a replacement for professional therapy.</div>
 </footer>
 
+<script src="script.js"></script>
 <script src="waves.js"></script>
 </body>
 </html>

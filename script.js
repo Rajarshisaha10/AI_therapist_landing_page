@@ -149,6 +149,15 @@ function switchTab(type) {
   if (forms[type]) forms[type].classList.add('active');
   if (tabs[type]) tabs[type].classList.add('active');
   modalSuccess.classList.remove('active');
+
+  const tabsContainer = document.getElementById('modal-tabs-container');
+  if (tabsContainer) {
+    if (type === 'login') {
+      tabsContainer.style.display = 'none';
+    } else {
+      tabsContainer.style.display = 'flex';
+    }
+  }
 }
 
 // --- API LOGIC ---

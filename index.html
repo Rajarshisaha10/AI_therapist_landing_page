@@ -213,7 +213,8 @@ footer{background:var(--plum);padding:2.2rem 3.5rem;display:flex;justify-content
 /* ── RESPONSIVE ── */
 @media(max-width:860px){
   nav{padding:1rem 1.5rem;}
-  .nav-links li:not(:last-child){display:none;}
+  .nav-links li:not([id^="nav-"]){display:none;}
+  .action-buttons{justify-content:center; flex-wrap:wrap;}
   .hero{grid-template-columns:1fr;min-height:auto;padding:7rem 1.5rem 3rem;text-align:center;}
   .hero-left{max-width:100%;padding-top:2rem;}
   .hero-sub,.email-row{margin-left:auto;margin-right:auto;}
@@ -967,7 +968,7 @@ body.reveal-homepage .mascot-stage {
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
     
-    <div class="modal-tabs">
+    <div class="modal-tabs" id="modal-tabs-container">
       <button class="modal-tab active" id="tab-waitlist" onclick="switchTab('waitlist')">Join Waitlist</button>
       <button class="modal-tab" id="tab-account" onclick="switchTab('account')">Create Account</button>
       <button class="modal-tab" id="tab-login" onclick="switchTab('login')">Login</button>

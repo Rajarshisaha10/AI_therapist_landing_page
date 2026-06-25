@@ -106,6 +106,22 @@
     </table>
     
     <div id="error-container" class="error-msg"></div>
+
+    <h1 style="margin-top: 4rem;">User Feedback</h1>
+    <table id="fb-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="fb-body">
+        <tr><td colspan="4">Loading feedback...</td></tr>
+      </tbody>
+    </table>
+    <div id="fb-error" class="error-msg"></div>
   </div>
 
   <script>
@@ -115,18 +131,17 @@
       throw new Error("Invalid password");
     }
 
+    const API_BASE = 'https://theraseek-api.rajarshisaha123-4.workers.dev';
+
     async function loadUsers() {
       const tbody = document.getElementById('users-body');
       const errBox = document.getElementById('error-container');
       
       try {
-        // Change this URL to your deployed worker URL later
-        const res = await fetch('https://theraseek-api.rajarshisaha123-4.workers.dev/api/admin/users');
+        const res = await fetch(`${API_BASE}/api/admin/users`);
         const data = await res.json();
         
-        if (!data.ok) {
-          throw new Error(data.error || "Failed to fetch users");
-        }
+        if (!data.ok) throw new Error(data.error || "Failed to fetch users");
         
         if (data.users.length === 0) {
           tbody.innerHTML = '<tr><td colspan="4">No users found in database.</td></tr>';
@@ -152,8 +167,43 @@
         errBox.textContent = "Error: " + err.message;
       }
     }
+
+    async function loadFeedback() {
+      const tbody = document.getElementById('fb-body');
+      const errBox = document.getElementById('fb-error');
+      
+      try {
+        const res = await fetch(`${API_BASE}/api/admin/feedback`);
+        const data = await res.json();
+        
+        if (!data.ok) throw new Error(data.error || "Failed to fetch feedback");
+        
+        if (data.feedback.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4">No feedback found.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = '';
+        data.feedback.forEach(fb => {
+          const tr = document.createElement('tr');
+          const date = new Date(fb.created_at).toLocaleString();
+          
+          tr.innerHTML = `
+            <td>${fb.id}</td>
+            <td><strong>${fb.email}</strong></td>
+            <td style="max-width:300px; white-space:pre-wrap;">${fb.message}</td>
+            <td>${date}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="4">Failed to load feedback.</td></tr>';
+        errBox.textContent = "Error: " + err.message;
+      }
+    }
     
     loadUsers();
+    loadFeedback();
   </script>
 </body>
 </html>

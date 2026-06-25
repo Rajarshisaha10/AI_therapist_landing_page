@@ -101,19 +101,26 @@ function closeModal() {
   setTimeout(() => {
     formWaitlist.reset();
     formAccount.reset();
+    if (document.getElementById('form-login')) document.getElementById('form-login').reset();
+    
     wlMsg.textContent = '';
     accMsg.textContent = '';
+    if (document.getElementById('log-msg')) document.getElementById('log-msg').textContent = '';
+    
     wlMsg.className = 'form-msg';
     accMsg.className = 'form-msg';
+    if (document.getElementById('log-msg')) document.getElementById('log-msg').className = 'form-msg';
     
     // Switch out of success state if it was there
     formWaitlist.classList.remove('active');
     formAccount.classList.remove('active');
+    if (document.getElementById('form-login')) document.getElementById('form-login').classList.remove('active');
     modalSuccess.classList.remove('active');
     
     // Reactivate appropriate tab
     if (tabWaitlist.classList.contains('active')) formWaitlist.classList.add('active');
     if (tabAccount.classList.contains('active')) formAccount.classList.add('active');
+    if (document.getElementById('tab-login') && document.getElementById('tab-login').classList.contains('active')) document.getElementById('form-login').classList.add('active');
   }, 300);
 }
 
@@ -121,26 +128,105 @@ function switchTab(type) {
   // Clear messages
   wlMsg.textContent = '';
   accMsg.textContent = '';
+  if (document.getElementById('log-msg')) document.getElementById('log-msg').textContent = '';
   
-  if (type === 'waitlist') {
-    tabWaitlist.classList.add('active');
-    tabAccount.classList.remove('active');
-    formWaitlist.classList.add('active');
-    formAccount.classList.remove('active');
-    modalSuccess.classList.remove('active');
-  } else {
-    tabAccount.classList.add('active');
-    tabWaitlist.classList.remove('active');
-    formAccount.classList.add('active');
-    formWaitlist.classList.remove('active');
-    modalSuccess.classList.remove('active');
-  }
+  const forms = {
+    'waitlist': document.getElementById('form-waitlist'),
+    'account': document.getElementById('form-account'),
+    'login': document.getElementById('form-login')
+  };
+  const tabs = {
+    'waitlist': document.getElementById('tab-waitlist'),
+    'account': document.getElementById('tab-account'),
+    'login': document.getElementById('tab-login')
+  };
+
+  Object.keys(forms).forEach(key => {
+    if (forms[key]) forms[key].classList.remove('active');
+    if (tabs[key]) tabs[key].classList.remove('active');
+  });
+
+  if (forms[type]) forms[type].classList.add('active');
+  if (tabs[type]) tabs[type].classList.add('active');
+  modalSuccess.classList.remove('active');
 }
 
 // --- API LOGIC ---
 const API_BASE = 'https://theraseek-api.rajarshisaha123-4.workers.dev';
 
-document.getElementById('form-waitlist').addEventListener('submit', async (e) => {
+// Session Handling
+function checkSession() {
+  const email = localStorage.getItem('theraseek_email');
+  const loginItem = document.getElementById('nav-login-item');
+  const logoutItem = document.getElementById('nav-logout-item');
+  const dashboardItem = document.getElementById('nav-dashboard-item');
+  
+  if (email && loginItem && logoutItem && dashboardItem) {
+    loginItem.style.display = 'none';
+    logoutItem.style.display = 'block';
+    dashboardItem.style.display = 'block';
+  }
+}
+document.addEventListener('DOMContentLoaded', checkSession);
+
+function logout() {
+  localStorage.removeItem('theraseek_email');
+  localStorage.removeItem('theraseek_status');
+  window.location.reload();
+}
+
+// Feedback Logic
+const feedbackModal = document.getElementById('feedback-modal');
+function openFeedback() {
+  if (feedbackModal) feedbackModal.classList.add('active');
+}
+function closeFeedback() {
+  if (feedbackModal) {
+    feedbackModal.classList.remove('active');
+    setTimeout(() => {
+      document.getElementById('form-feedback').reset();
+      document.getElementById('fb-status').textContent = '';
+      document.getElementById('form-feedback').style.display = 'block';
+      document.getElementById('fb-success').style.display = 'none';
+    }, 300);
+  }
+}
+
+document.getElementById('form-feedback')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('fb-email').value.trim();
+  const message = document.getElementById('fb-msg').value.trim();
+  const btn = document.getElementById('btn-fb');
+  const fbStatus = document.getElementById('fb-status');
+  
+  if (!message) return;
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  fbStatus.textContent = '';
+  fbStatus.className = 'form-msg';
+
+  try {
+    const res = await fetch(`${API_BASE}/api/feedback`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, message })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Failed to submit feedback');
+
+    document.getElementById('form-feedback').style.display = 'none';
+    document.getElementById('fb-success').style.display = 'block';
+  } catch (err) {
+    fbStatus.textContent = err.message || 'Something went wrong.';
+    fbStatus.className = 'form-msg error';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Submit Feedback →';
+  }
+});
+
+// Waitlist
+document.getElementById('form-waitlist')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('wl-email').value.trim();
   const btn = document.getElementById('btn-wl');
@@ -176,7 +262,8 @@ document.getElementById('form-waitlist').addEventListener('submit', async (e) =>
   }
 });
 
-document.getElementById('form-account').addEventListener('submit', async (e) => {
+// Create Account
+document.getElementById('form-account')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('acc-email').value.trim();
   const password = document.getElementById('acc-pass').value.trim();
@@ -210,5 +297,44 @@ document.getElementById('form-account').addEventListener('submit', async (e) => 
   } finally {
     btn.disabled = false;
     btn.textContent = 'Create Account →';
+  }
+});
+
+// Login
+document.getElementById('form-login')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('log-email').value.trim();
+  const password = document.getElementById('log-pass').value.trim();
+  const btn = document.getElementById('btn-log');
+  const logMsg = document.getElementById('log-msg');
+  
+  if (!email || !password) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Logging in...';
+  logMsg.textContent = '';
+  logMsg.className = 'form-msg';
+
+  try {
+    const res = await fetch(`${API_BASE}/api/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Invalid credentials');
+
+    localStorage.setItem('theraseek_email', data.email);
+    localStorage.setItem('theraseek_status', data.status);
+    
+    window.location.href = 'dashboard.html';
+
+  } catch (err) {
+    logMsg.textContent = err.message || 'Something went wrong. Please try again.';
+    logMsg.className = 'form-msg error';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Log In →';
   }
 });

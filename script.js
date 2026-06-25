@@ -1,63 +1,133 @@
-// placeholder art until real assets are dropped in
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('error', () => {
-    const isLogo = img.classList.contains('logo');
-    const el = document.createElement('div');
-    el.className = img.className;
-    el.style.cssText = isLogo
-      ? 'height:48px;display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-size:1.6rem;color:#6E2C3E;margin:0 auto 1.6rem;'
-      : 'width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 32%,#7C6191,#46305E 70%);box-shadow:0 20px 26px rgba(70,48,94,.28);';
-    el.textContent = isLogo ? 'theraseek' : '';
-    img.replaceWith(el);
-  });
-});
+// --- MODAL LOGIC ---
+const modal = document.getElementById('auth-modal');
+const formWaitlist = document.getElementById('form-waitlist');
+const formAccount = document.getElementById('form-account');
+const modalSuccess = document.getElementById('modal-success');
+const tabWaitlist = document.getElementById('tab-waitlist');
+const tabAccount = document.getElementById('tab-account');
+const wlMsg = document.getElementById('wl-msg');
+const accMsg = document.getElementById('acc-msg');
+const successDesc = document.getElementById('success-desc');
 
-// form
-const form  = document.getElementById('join');
-const email = document.getElementById('email');
-const hint  = document.getElementById('hint');
-const count = document.getElementById('count');
+function openModal(type) {
+  modal.classList.add('active');
+  switchTab(type);
+}
 
-const btn = form.querySelector('button');
+function closeModal() {
+  modal.classList.remove('active');
+  // Reset forms on close
+  setTimeout(() => {
+    formWaitlist.reset();
+    formAccount.reset();
+    wlMsg.textContent = '';
+    accMsg.textContent = '';
+    wlMsg.className = 'form-msg';
+    accMsg.className = 'form-msg';
+    
+    // Switch out of success state if it was there
+    formWaitlist.classList.remove('active');
+    formAccount.classList.remove('active');
+    modalSuccess.classList.remove('active');
+    
+    // Reactivate appropriate tab
+    if (tabWaitlist.classList.contains('active')) formWaitlist.classList.add('active');
+    if (tabAccount.classList.contains('active')) formAccount.classList.add('active');
+  }, 300);
+}
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const value = email.value.trim();
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-    hint.textContent = 'Hmm, that email looks off — mind checking it?';
-    hint.classList.add('is-error');
-    email.focus();
-    return;
+function switchTab(type) {
+  // Clear messages
+  wlMsg.textContent = '';
+  accMsg.textContent = '';
+  
+  if (type === 'waitlist') {
+    tabWaitlist.classList.add('active');
+    tabAccount.classList.remove('active');
+    formWaitlist.classList.add('active');
+    formAccount.classList.remove('active');
+    modalSuccess.classList.remove('active');
+  } else {
+    tabAccount.classList.add('active');
+    tabWaitlist.classList.remove('active');
+    formAccount.classList.add('active');
+    formWaitlist.classList.remove('active');
+    modalSuccess.classList.remove('active');
   }
+}
 
-  hint.classList.remove('is-error');
+// --- API LOGIC ---
+const API_BASE = 'https://theraseek-api.rajarshisaha123-4.workers.dev';
+
+document.getElementById('form-waitlist').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('wl-email').value.trim();
+  const btn = document.getElementById('btn-wl');
+  
+  if (!email) return;
+
   btn.disabled = true;
-  btn.textContent = 'Saving…';
+  btn.textContent = 'Saving...';
+  wlMsg.textContent = '';
+  wlMsg.className = 'form-msg';
 
   try {
-    const endpoint = (typeof WAITLIST_ENDPOINT !== 'undefined' && WAITLIST_ENDPOINT) || '';
-    if (endpoint) {
-      // Apps Script needs a "simple" request to skip CORS preflight:
-      // text/plain body + no-cors mode. We can't read the response, so we
-      // treat a completed request as success.
-      await fetch(endpoint, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ email: value, source: 'landing' }),
-      });
-    } else {
-      await new Promise((r) => setTimeout(r, 500)); // demo mode
-    }
+    const res = await fetch(`${API_BASE}/api/waitlist`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Failed to join waitlist');
 
-    form.classList.add('is-done');
-    hint.innerHTML = "💌 You're in! Watch your inbox — Seeker can't wait to meet you.";
-    count.textContent = (parseInt(count.textContent.replace(/,/g, ''), 10) + 1).toLocaleString('en-IN');
+    // Show success
+    formWaitlist.classList.remove('active');
+    modalSuccess.classList.add('active');
+    successDesc.textContent = "💌 You're in! Watch your inbox — Luna can't wait to meet you.";
+
   } catch (err) {
+    wlMsg.textContent = err.message || 'Something went wrong. Please try again.';
+    wlMsg.className = 'form-msg error';
+  } finally {
     btn.disabled = false;
-    btn.textContent = 'Notify me →';
-    hint.textContent = 'Something went wrong on our end — please try again in a moment.';
-    hint.classList.add('is-error');
+    btn.textContent = 'Join Waitlist →';
+  }
+});
+
+document.getElementById('form-account').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('acc-email').value.trim();
+  const password = document.getElementById('acc-pass').value.trim();
+  const btn = document.getElementById('btn-acc');
+  
+  if (!email || !password) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Creating...';
+  accMsg.textContent = '';
+  accMsg.className = 'form-msg';
+
+  try {
+    const res = await fetch(`${API_BASE}/api/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Failed to create account');
+
+    // Show success
+    formAccount.classList.remove('active');
+    modalSuccess.classList.add('active');
+    successDesc.innerHTML = "Account created successfully.<br><br><strong>Waitlist Status: Pending</strong><br><br>We'll notify you the moment it's ready.";
+
+  } catch (err) {
+    accMsg.textContent = err.message || 'Something went wrong. Please try again.';
+    accMsg.className = 'form-msg error';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Create Account →';
   }
 });

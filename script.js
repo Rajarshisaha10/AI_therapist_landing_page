@@ -99,35 +99,35 @@ function closeModal() {
   modal.classList.remove('active');
   // Reset forms on close
   setTimeout(() => {
-    formWaitlist.reset();
-    formAccount.reset();
+    if (formWaitlist) formWaitlist.reset();
+    if (document.getElementById('form-account')) document.getElementById('form-account').reset();
     if (document.getElementById('form-login')) document.getElementById('form-login').reset();
     
-    wlMsg.textContent = '';
-    accMsg.textContent = '';
+    if (wlMsg) wlMsg.textContent = '';
+    if (accMsg) accMsg.textContent = '';
     if (document.getElementById('log-msg')) document.getElementById('log-msg').textContent = '';
     
-    wlMsg.className = 'form-msg';
-    accMsg.className = 'form-msg';
+    if (wlMsg) wlMsg.className = 'form-msg';
+    if (accMsg) accMsg.className = 'form-msg';
     if (document.getElementById('log-msg')) document.getElementById('log-msg').className = 'form-msg';
     
     // Switch out of success state if it was there
     formWaitlist.classList.remove('active');
-    formAccount.classList.remove('active');
+    if (document.getElementById('form-account')) document.getElementById('form-account').classList.remove('active');
     if (document.getElementById('form-login')) document.getElementById('form-login').classList.remove('active');
     modalSuccess.classList.remove('active');
     
     // Reactivate appropriate tab
-    if (tabWaitlist.classList.contains('active')) formWaitlist.classList.add('active');
-    if (tabAccount.classList.contains('active')) formAccount.classList.add('active');
+    if (tabWaitlist && tabWaitlist.classList.contains('active')) formWaitlist.classList.add('active');
+    if (document.getElementById('tab-account') && document.getElementById('tab-account').classList.contains('active')) document.getElementById('form-account').classList.add('active');
     if (document.getElementById('tab-login') && document.getElementById('tab-login').classList.contains('active')) document.getElementById('form-login').classList.add('active');
   }, 300);
 }
 
 function switchTab(type) {
   // Clear messages
-  wlMsg.textContent = '';
-  accMsg.textContent = '';
+  if (wlMsg) wlMsg.textContent = '';
+  if (accMsg) accMsg.textContent = '';
   if (document.getElementById('log-msg')) document.getElementById('log-msg').textContent = '';
   
   const forms = {

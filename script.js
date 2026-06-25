@@ -161,7 +161,7 @@ function switchTab(type) {
 }
 
 // --- API LOGIC ---
-const API_BASE = 'https://theraseek-api.rajarshisaha123-4.workers.dev';
+const API_BASE = 'https://theraseek-api.theraseek-backend.workers.dev';
 
 // Session Handling
 function checkSession() {

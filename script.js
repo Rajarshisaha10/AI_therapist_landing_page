@@ -16,9 +16,9 @@
       if (phoneScreen) phoneScreen.classList.add('is-booted');
       if (screenGlow) screenGlow.style.opacity = '1';
       if (screenParticles) screenParticles.style.opacity = '1';
-    }, 1000);
+    }, 500);
 
-    // Transition trigger at ~3.0 seconds
+    // Transition trigger at ~2.0 seconds
     setTimeout(() => {
       if (targetMascot && mascotContainer && overlay) {
         const targetRect = targetMascot.getBoundingClientRect();

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crisis Resources — Theraseek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.html">
+<style>
+  :root {
+    --bg:#F8E9E4;
+    --card:#FFFDFC;
+    --plum:#2A1820;
+    --plum-mid:#6E2C3E;
+    --accent:#A9415A;
+    --mauve:#C76E7F;
+    --muted:#5C4751;
+    --white:#FFFDFC;
+    --lavender:#F3CFC8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--plum); display: flex; flex-direction: column; min-height: 100vh; }
+  nav { padding: 1.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; }
+  .logo-text .thera { color: var(--plum); }
+  .logo-text .seek { color: var(--accent); }
+  .content-container { max-width: 800px; margin: 4rem auto; padding: 2rem; flex: 1; text-align: center; }
+  h1 { font-family: 'Playfair Display', serif; color: var(--plum-mid); font-size: 3rem; margin-bottom: 1rem; }
+  h3 { font-family: 'Playfair Display', serif; color: var(--plum); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.5rem; text-align: left;}
+  p { font-size: 1.1rem; line-height: 1.8; color: var(--muted); margin-bottom: 1.5rem; text-align: left; }
+  .alert-box { background: rgba(169, 65, 90, 0.1); border: 1px solid var(--accent); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; text-align: left;}
+  .alert-box strong { color: var(--accent); display: block; margin-bottom: 0.5rem; font-size: 1.2rem;}
+  ul { text-align: left; margin-left: 2rem; margin-bottom: 2rem; line-height: 1.8; color: var(--muted); }
+  footer { background: var(--plum); padding: 2.2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .foot-logo { height: 40px; width: auto; filter: brightness(0.85) sepia(0.2); }
+  .foot-links { display: flex; gap: 1.8rem; }
+  .foot-links a { text-decoration: none; font-size: 12px; color: rgba(201,168,196,0.5); transition: color .25s; }
+  .foot-links a:hover { color: var(--mauve); }
+  .foot-disc { font-size: 11px; color: rgba(201,168,196,0.28); font-weight: 300; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo-text" href="index.html"><span class="thera">Thera</span><span class="seek">seek</span></a>
+</nav>
+
+<div class="content-container">
+  <h1>Immediate Help & Resources</h1>
+  
+  <div class="alert-box">
+    <strong>If you are in immediate danger, please call 911 or go to your nearest emergency room.</strong>
+    <p style="margin-bottom: 0; font-size: 1rem;">Theraseek is an AI companion and is <strong>not</strong> a substitute for professional mental health care or emergency services. If you are experiencing a crisis, please use the resources below.</p>
+  </div>
+
+  <h3>US National Resources</h3>
+  <ul>
+    <li><strong>Suicide & Crisis Lifeline:</strong> Call or text <strong>988</strong> (Available 24/7, Free, Confidential)</li>
+    <li><strong>Crisis Text Line:</strong> Text HOME to <strong>741741</strong> to connect with a Crisis Counselor</li>
+    <li><strong>The Trevor Project (LGBTQ Youth):</strong> Call 866-488-7386 or text START to 678-678</li>
+    <li><strong>Veterans Crisis Line:</strong> Dial 988, then press 1, or text 838255</li>
+  </ul>
+
+  <h3>International Resources</h3>
+  <p>If you are outside the United States, please reach out to your local emergency services or find a crisis line in your country through <a href="https://findahelpline.com/" target="_blank" style="color: var(--accent);">Find A Helpline</a>.</p>
+</div>
+
+<footer>
+  <img class="foot-logo" src="assets/logo.png" alt="Theraseek"/>
+  <div class="foot-links">
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+  </div>
+  <div class="foot-disc">Not a replacement for professional therapy.</div>
+</footer>
+
+</body>
+</html>

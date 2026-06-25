@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Theraseek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.html">
+<style>
+  :root {
+    --bg:#F8E9E4;
+    --card:#FFFDFC;
+    --plum:#2A1820;
+    --plum-mid:#6E2C3E;
+    --accent:#A9415A;
+    --mauve:#C76E7F;
+    --muted:#5C4751;
+    --white:#FFFDFC;
+    --lavender:#F3CFC8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--plum); display: flex; flex-direction: column; min-height: 100vh; }
+  nav { padding: 1.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; }
+  .logo-text .thera { color: var(--plum); }
+  .logo-text .seek { color: var(--accent); }
+  .content-container { max-width: 800px; margin: 4rem auto; padding: 2rem; flex: 1; text-align: center; }
+  h1 { font-family: 'Playfair Display', serif; color: var(--plum-mid); font-size: 3rem; margin-bottom: 2rem; }
+  p { font-size: 1.1rem; line-height: 1.8; color: var(--muted); margin-bottom: 1.5rem; text-align: left; }
+  footer { background: var(--plum); padding: 2.2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .foot-logo { height: 40px; width: auto; filter: brightness(0.85) sepia(0.2); }
+  .foot-links { display: flex; gap: 1.8rem; }
+  .foot-links a { text-decoration: none; font-size: 12px; color: rgba(201,168,196,0.5); transition: color .25s; }
+  .foot-links a:hover { color: var(--mauve); }
+  .foot-disc { font-size: 11px; color: rgba(201,168,196,0.28); font-weight: 300; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo-text" href="index.html"><span class="thera">Thera</span><span class="seek">seek</span></a>
+</nav>
+
+<div class="content-container">
+  <h1>The Story of Theraseek</h1>
+  <p>At Theraseek, we believe that mental health support should be a universal right, not a luxury. For too long, the journey to finding empathetic, affordable, and accessible therapy has been hindered by long waitlists, high costs, and logistical barriers.</p>
+  <p>That's why we built Luna, our advanced AI companion. Luna was designed to bridge the gap, providing a safe, judgment-free space for you to unpack your thoughts, day or night. While she doesn't replace the profound impact of professional human therapists, she is here to hold space for you when you need it most.</p>
+  <p>Our mission is simple: to democratize mental wellness and ensure that no one ever has to face their darkest moments alone.</p>
+</div>
+
+<footer>
+  <img class="foot-logo" src="assets/logo.png" alt="Theraseek"/>
+  <div class="foot-links">
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="index.html">Home</a>
+    <a href="crisis.html">Crisis resources</a>
+  </div>
+  <div class="foot-disc">Not a replacement for professional therapy.</div>
+</footer>
+
+</body>
+</html>

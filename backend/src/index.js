@@ -66,7 +66,7 @@ const getGoogleAuthUrl = (env, origin) => {
   const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
   const options = {
     redirect_uri: `${origin}/api/auth/google/callback`,
-    client_id: env.GOOGLE_CLIENT_ID,
+    client_id: env.GOOGLE_CLIENT_ID.trim(),
     access_type: 'offline',
     response_type: 'code',
     prompt: 'consent',
@@ -98,8 +98,8 @@ app.get('/api/auth/google/callback', async (c) => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
         code,
-        client_id: c.env.GOOGLE_CLIENT_ID,
-        client_secret: c.env.GOOGLE_CLIENT_SECRET,
+        client_id: c.env.GOOGLE_CLIENT_ID.trim(),
+        client_secret: c.env.GOOGLE_CLIENT_SECRET.trim(),
         redirect_uri: `${origin}/api/auth/google/callback`,
         grant_type: 'authorization_code',
       }),

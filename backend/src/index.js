@@ -19,15 +19,6 @@ const getDb = async (env) => {
   return client
 }
 
-// Helper to hash password using WebCrypto SHA-256
-async function hashPassword(password) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
 // Initialize Database Tables
 async function initDb(db) {
   await db.query(`
@@ -70,48 +61,83 @@ app.post('/api/waitlist', async (c) => {
   }
 })
 
-// 2. Signup Endpoint
-app.post('/api/signup', async (c) => {
-  try {
-    const body = await c.req.json()
-    const db = await getDb(c.env)
-    await initDb(db)
-    
-    // Hash the password
-    const hashedPassword = await hashPassword(body.password)
-    
-    await db.query(
-      'INSERT INTO users (email, password_hash, status) VALUES ($1, $2, $3) ON CONFLICT (email) DO UPDATE SET password_hash = EXCLUDED.password_hash, status = EXCLUDED.status',
-      [body.email, hashedPassword, 'account']
-    )
-    
-    await db.end()
-    return c.json({ ok: true, message: "Account created" })
-  } catch (err) {
-    return c.json({ ok: false, error: err.message }, 500)
-  }
-})
+// Google Auth Helpers
+const getGoogleAuthUrl = (env, origin) => {
+  const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+  const options = {
+    redirect_uri: `${origin}/api/auth/google/callback`,
+    client_id: env.GOOGLE_CLIENT_ID,
+    access_type: 'offline',
+    response_type: 'code',
+    prompt: 'consent',
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ].join(' '),
+  };
+  const qs = new URLSearchParams(options);
+  return `${rootUrl}?${qs.toString()}`;
+};
 
-// 3. Login Endpoint
-app.post('/api/login', async (c) => {
+// 2. Google Auth Initiation
+app.get('/api/auth/google', (c) => {
+  const origin = new URL(c.req.url).origin;
+  return c.redirect(getGoogleAuthUrl(c.env, origin));
+});
+
+// 3. Google Auth Callback
+app.get('/api/auth/google/callback', async (c) => {
+  const code = c.req.query('code');
+  if (!code) return c.text('No code provided', 400);
+
   try {
-    const body = await c.req.json()
-    const db = await getDb(c.env)
-    await initDb(db)
+    const origin = new URL(c.req.url).origin;
+    // Exchange code for token
+    const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        code,
+        client_id: c.env.GOOGLE_CLIENT_ID,
+        client_secret: c.env.GOOGLE_CLIENT_SECRET,
+        redirect_uri: `${origin}/api/auth/google/callback`,
+        grant_type: 'authorization_code',
+      }),
+    });
+    const tokenData = await tokenRes.json();
+    if (!tokenRes.ok) throw new Error('Failed to fetch token: ' + JSON.stringify(tokenData));
+
+    // Get user info
+    const userRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+      headers: { Authorization: `Bearer ${tokenData.access_token}` },
+    });
+    const userData = await userRes.json();
+    if (!userRes.ok) throw new Error('Failed to fetch user');
+
+    const email = userData.email;
     
-    const hashedPassword = await hashPassword(body.password)
+    // DB logic
+    const db = await getDb(c.env);
+    await initDb(db);
     
-    const res = await db.query('SELECT * FROM users WHERE email = $1 AND password_hash = $2', [body.email, hashedPassword])
-    await db.end()
+    // Check if user exists
+    const res = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+    let status = 'account';
     
     if (res.rows.length === 0) {
-      return c.json({ ok: false, error: "Invalid email or password" }, 401)
+      await db.query(
+        'INSERT INTO users (email, status) VALUES ($1, $2)',
+        [email, 'account']
+      );
+    } else {
+      status = res.rows[0].status;
     }
-    
-    const user = res.rows[0]
-    return c.json({ ok: true, status: user.status, email: user.email })
+    await db.end();
+
+    // Redirect to frontend dashboard
+    return c.redirect(`https://rajarshisaha10.github.io/AI_therapist_landing_page/dashboard.html?email=${encodeURIComponent(email)}&status=${status}`);
   } catch (err) {
-    return c.json({ ok: false, error: err.message }, 500)
+    return c.text('Auth error: ' + err.message, 500);
   }
 })
 

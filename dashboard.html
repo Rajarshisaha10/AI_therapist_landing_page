@@ -120,6 +120,16 @@
 
 <script>
   function checkAuth() {
+    const params = new URLSearchParams(window.location.search);
+    const paramEmail = params.get('email');
+    const paramStatus = params.get('status');
+    
+    if (paramEmail) {
+      localStorage.setItem('theraseek_email', paramEmail);
+      localStorage.setItem('theraseek_status', paramStatus || 'account');
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     const email = localStorage.getItem('theraseek_email');
     const status = localStorage.getItem('theraseek_status') || 'waitlist';
     

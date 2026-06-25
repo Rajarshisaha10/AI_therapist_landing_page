@@ -9,7 +9,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="index.css">
 <style>
-  body { background: var(--bg); display: flex; flex-direction: column; min-height: 100vh; }
+  :root {
+    --bg:#F8E9E4;
+    --card:#FFFDFC;
+    --plum:#2A1820;
+    --plum-mid:#6E2C3E;
+    --accent:#A9415A;
+    --mauve:#C76E7F;
+    --muted:#5C4751;
+    --white:#FFFDFC;
+    --lavender:#F3CFC8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); display: flex; flex-direction: column; min-height: 100vh; color: var(--plum); }
+  nav { padding: 1.5rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; }
+  .logo-text .thera { color: var(--plum); }
+  .logo-text .seek { color: var(--accent); }
   .dashboard-container {
     flex: 1;
     display: flex;

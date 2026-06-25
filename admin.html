@@ -116,10 +116,11 @@
           <th>Email</th>
           <th>Message</th>
           <th>Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody id="fb-body">
-        <tr><td colspan="4">Loading feedback...</td></tr>
+        <tr><td colspan="5">Loading feedback...</td></tr>
       </tbody>
     </table>
     <div id="fb-error" class="error-msg"></div>
@@ -193,7 +194,7 @@
         if (!data.ok) throw new Error(data.error || "Failed to fetch feedback");
         
         if (data.feedback.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="4">No feedback found.</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="5">No feedback found.</td></tr>';
           return;
         }
 
@@ -207,12 +208,25 @@
             <td><strong>${fb.email}</strong></td>
             <td style="max-width:300px; white-space:pre-wrap;">${fb.message}</td>
             <td>${date}</td>
+            <td><button onclick="deleteFeedback(${fb.id})" style="background:#e07a5f; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Delete</button></td>
           `;
           tbody.appendChild(tr);
         });
       } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="4">Failed to load feedback.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5">Failed to load feedback.</td></tr>';
         errBox.textContent = "Error: " + err.message;
+      }
+    }
+    
+    async function deleteFeedback(id) {
+      if (!confirm("Are you sure you want to delete this feedback?")) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/admin/feedback/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || "Failed to delete feedback");
+        loadFeedback(); // Refresh the list
+      } catch (err) {
+        alert("Error deleting feedback: " + err.message);
       }
     }
     

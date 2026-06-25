@@ -61,12 +61,15 @@ app.post('/api/waitlist', async (c) => {
   }
 })
 
-// Google Auth Helpers
-const getGoogleAuthUrl = (env, origin) => {
+// 2. Google Auth Initiation
+app.get('/api/auth/google', (c) => {
+  const origin = new URL(c.req.url).origin;
+  const redirectUrl = c.req.query('redirect') || 'https://rajarshisaha10.github.io/AI_therapist_landing_page/dashboard.html';
+
   const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
   const options = {
     redirect_uri: `${origin}/api/auth/google/callback`,
-    client_id: env.GOOGLE_CLIENT_ID.trim(),
+    client_id: c.env.GOOGLE_CLIENT_ID.trim(),
     access_type: 'offline',
     response_type: 'code',
     prompt: 'consent',
@@ -74,20 +77,16 @@ const getGoogleAuthUrl = (env, origin) => {
       'https://www.googleapis.com/auth/userinfo.profile',
       'https://www.googleapis.com/auth/userinfo.email',
     ].join(' '),
+    state: redirectUrl
   };
   const qs = new URLSearchParams(options);
-  return `${rootUrl}?${qs.toString()}`;
-};
-
-// 2. Google Auth Initiation
-app.get('/api/auth/google', (c) => {
-  const origin = new URL(c.req.url).origin;
-  return c.redirect(getGoogleAuthUrl(c.env, origin));
+  return c.redirect(`${rootUrl}?${qs.toString()}`);
 });
 
 // 3. Google Auth Callback
 app.get('/api/auth/google/callback', async (c) => {
   const code = c.req.query('code');
+  const state = c.req.query('state'); // The frontend redirect URL
   if (!code) return c.text('No code provided', 400);
 
   try {
@@ -135,7 +134,11 @@ app.get('/api/auth/google/callback', async (c) => {
     await db.end();
 
     // Redirect to frontend dashboard
-    return c.redirect(`https://rajarshisaha10.github.io/AI_therapist_landing_page/dashboard.html?email=${encodeURIComponent(email)}&status=${status}`);
+    const finalRedirect = new URL(state || 'https://rajarshisaha10.github.io/AI_therapist_landing_page/dashboard.html');
+    finalRedirect.searchParams.set('email', email);
+    finalRedirect.searchParams.set('status', status);
+    
+    return c.redirect(finalRedirect.toString());
   } catch (err) {
     return c.text('Auth error: ' + err.message, 500);
   }

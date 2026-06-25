@@ -163,4 +163,19 @@ app.get('/api/admin/feedback', async (c) => {
   }
 })
 
+app.delete('/api/admin/users/:id', async (c) => {
+  try {
+    const id = c.req.param('id')
+    const db = await getDb(c.env)
+    await initDb(db)
+
+    await db.query('DELETE FROM users WHERE id = $1', [id])
+    await db.end()
+    
+    return c.json({ ok: true, message: "User deleted" })
+  } catch (err) {
+    return c.json({ ok: false, error: err.message }, 500)
+  }
+})
+
 export default app
